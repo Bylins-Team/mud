@@ -68,5 +68,3 @@
 ## Детальные отчеты
 
 Все находки в `bugs/findings/001_*.md` - `bugs/findings/020_*.md`
-
-Детальный прогресс анализа: `bugs/PROGRESS.txt`
