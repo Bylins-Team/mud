@@ -15,6 +15,13 @@ import re
 import sys
 from pathlib import Path
 
+# Global name registries for cross-references
+ROOM_NAMES = {}    # vnum -> name
+MOB_NAMES = {}     # vnum -> name
+OBJ_NAMES = {}     # vnum -> name
+TRIGGER_NAMES = {} # vnum -> name
+ZONE_NAMES = {}    # vnum -> name
+
 # Action flags (MOB_x) - from constants.cpp action_bits[]
 ACTION_FLAGS = [
     "kSpec", "kSentinel", "kScavenger", "kIsNpc", "kAware", "kAggressive",
@@ -113,6 +120,230 @@ APPLY_TYPES = [
     "kSkillsMagicNumber", "kMagicResistance", "kAffectKnowLevel", "kFeat",
     "kInitiative", "kReligion", "kAbsorbHp", "kPerceptionRange", "kPoisonAdd"
 ]
+
+# Trigger attach types
+TRIGGER_ATTACH_TYPES = ["kMob", "kObj", "kRoom"]
+
+# Trigger types (letters -> flag names)
+TRIGGER_TYPES = {
+    'g': 'kGlobal',      # Global
+    'r': 'kRandom',      # Random
+    'c': 'kCommand',     # Command
+    's': 'kSpeech',      # Speech
+    'a': 'kAct',         # Act
+    'd': 'kDeath',       # Death
+    'f': 'kFight',       # Fight
+    'h': 'kHitprcnt',    # HitPercent
+    'e': 'kGreet',       # Greet
+    'o': 'kEntry',       # Entry
+    'b': 'kReceive',     # Receive
+    'q': 'kLoad',        # Load
+    'l': 'kLeave',       # Leave
+    'n': 'kDoor',        # Door
+    'i': 'kGive',        # Give
+    'j': 'kConsume',     # Consume
+    't': 'kTimer',       # Timer
+    'u': 'kGet',         # Get
+    'p': 'kDrop',        # Drop
+    'm': 'kSit',         # Sit
+    'k': 'kCast',        # Cast
+    'w': 'kTime',        # Time
+    'x': 'kUnlock',      # Unlock
+    'y': 'kOpen',        # Open
+    'z': 'kClose',       # Close
+    '1': 'kStart',       # Start
+    '2': 'kIncome',      # Income
+}
+
+# Zone reset command types
+ZONE_CMD_TYPES = {
+    'M': 'LOAD_MOB',
+    'O': 'LOAD_OBJ',
+    'G': 'GIVE_OBJ',
+    'E': 'EQUIP_MOB',
+    'P': 'PUT_IN_OBJ',
+    'D': 'SET_DOOR',
+    'R': 'REMOVE_OBJ',
+    'T': 'ATTACH_TRIGGER',
+    'V': 'SET_VARIABLE',
+    'Q': 'SPEC_LOAD',
+}
+
+# Directions for zone door commands
+ZONE_DIRECTIONS = ['kNorth', 'kEast', 'kSouth', 'kWest', 'kUp', 'kDown']
+
+
+def get_room_name(vnum):
+    """Get room name by vnum for comments."""
+    return ROOM_NAMES.get(vnum, '')
+
+
+def get_mob_name(vnum):
+    """Get mob name by vnum for comments."""
+    return MOB_NAMES.get(vnum, '')
+
+
+def get_obj_name(vnum):
+    """Get object name by vnum for comments."""
+    return OBJ_NAMES.get(vnum, '')
+
+
+def get_trigger_name(vnum):
+    """Get trigger name by vnum for comments."""
+    return TRIGGER_NAMES.get(vnum, '')
+
+
+def load_name_from_yaml(filepath):
+    """Extract name and vnum from a YAML file."""
+    try:
+        with open(filepath, 'r', encoding='koi8-r') as f:
+            content = f.read()
+        vnum = None
+        name = None
+        for line in content.split('\n'):
+            if line.startswith('vnum:'):
+                vnum = int(line.split(':')[1].strip())
+            elif line.startswith('name:'):
+                # Remove quotes
+                name = line.split(':', 1)[1].strip().strip('"')
+                break
+        return vnum, name
+    except:
+        return None, None
+
+
+def load_names_from_yaml_dir(yaml_dir, name_key='name'):
+    """Load names from YAML files in directory."""
+    names = {}
+    yaml_path = Path(yaml_dir)
+    for yaml_file in yaml_path.glob('*.yaml'):
+        try:
+            with open(yaml_file, 'r', encoding='koi8-r') as f:
+                content = f.read()
+            vnum = None
+            name = None
+            for line in content.split('\n'):
+                line = line.strip()
+                if line.startswith('vnum:'):
+                    vnum = int(line.split(':')[1].strip())
+                elif line.startswith(f'{name_key}:'):
+                    # Remove quotes
+                    name = line.split(':', 1)[1].strip().strip('"')
+                    if vnum is not None:
+                        break
+            if vnum is not None and name:
+                names[vnum] = name
+        except:
+            pass
+    return names
+
+
+def build_name_registries(world_dir):
+    """Build all name registries from world files."""
+    global ROOM_NAMES, MOB_NAMES, OBJ_NAMES, TRIGGER_NAMES, ZONE_NAMES
+
+    world_path = Path(world_dir)
+
+    # Load room names - try .wld first, then .yaml
+    wld_files = list(world_path.glob('wld/*.wld'))
+    if wld_files:
+        for wld_file in wld_files:
+            rooms = parse_wld_file(str(wld_file))
+            for room in rooms:
+                ROOM_NAMES[room['vnum']] = room['name']
+    else:
+        ROOM_NAMES = load_names_from_yaml_dir(world_path / 'wld', 'name')
+
+    # Load mob names - try .mob first, then .yaml
+    mob_files = list(world_path.glob('mob/*.mob'))
+    if mob_files:
+        for mob_file in mob_files:
+            mobs = parse_mob_file(str(mob_file))
+            for mob in mobs:
+                MOB_NAMES[mob['vnum']] = mob.get('names', {}).get('nominative', '')
+    else:
+        # For mobs, name is under names.nominative - need to extract differently
+        for yaml_file in (world_path / 'mob').glob('*.yaml'):
+            try:
+                with open(yaml_file, 'r', encoding='koi8-r') as f:
+                    content = f.read()
+                vnum = None
+                name = None
+                in_names = False
+                for line in content.split('\n'):
+                    stripped = line.strip()
+                    # Check for top-level keys (not indented)
+                    is_top_level = line and not line[0].isspace() and ':' in line
+                    if stripped.startswith('vnum:'):
+                        vnum = int(stripped.split(':')[1].strip())
+                    elif stripped == 'names:':
+                        in_names = True
+                    elif in_names and stripped.startswith('nominative:'):
+                        name = stripped.split(':', 1)[1].strip().strip('"')
+                        break
+                    elif in_names and is_top_level and not stripped.startswith('names:'):
+                        in_names = False
+                if vnum is not None and name:
+                    MOB_NAMES[vnum] = name
+            except:
+                pass
+
+    # Load object names - try .obj first, then .yaml
+    obj_files = list(world_path.glob('obj/*.obj'))
+    if obj_files:
+        for obj_file in obj_files:
+            objs = parse_obj_file(str(obj_file))
+            for obj in objs:
+                OBJ_NAMES[obj['vnum']] = obj.get('names', {}).get('nominative', '')
+    else:
+        # For objects, name is under names.nominative
+        for yaml_file in (world_path / 'obj').glob('*.yaml'):
+            try:
+                with open(yaml_file, 'r', encoding='koi8-r') as f:
+                    content = f.read()
+                vnum = None
+                name = None
+                in_names = False
+                for line in content.split('\n'):
+                    stripped = line.strip()
+                    # Check for top-level keys (not indented)
+                    is_top_level = line and not line[0].isspace() and ':' in line
+                    if stripped.startswith('vnum:'):
+                        vnum = int(stripped.split(':')[1].strip())
+                    elif stripped == 'names:':
+                        in_names = True
+                    elif in_names and stripped.startswith('nominative:'):
+                        name = stripped.split(':', 1)[1].strip().strip('"')
+                        break
+                    elif in_names and is_top_level and not stripped.startswith('names:'):
+                        in_names = False
+                if vnum is not None and name:
+                    OBJ_NAMES[vnum] = name
+            except:
+                pass
+
+    # Load trigger names - try .trg first, then .yaml
+    trg_files = list(world_path.glob('trg/*.trg'))
+    if trg_files:
+        for trg_file in trg_files:
+            triggers = parse_trg_file(str(trg_file))
+            for trg in triggers:
+                TRIGGER_NAMES[trg['vnum']] = trg['name']
+    else:
+        TRIGGER_NAMES = load_names_from_yaml_dir(world_path / 'trg', 'name')
+
+    # Load zone names - try .zon first, then .yaml
+    zon_files = list(world_path.glob('zon/*.zon'))
+    if zon_files:
+        for zon_file in zon_files:
+            zone = parse_zon_file(str(zon_file))
+            if zone:
+                ZONE_NAMES[zone['vnum']] = zone['name']
+    else:
+        ZONE_NAMES = load_names_from_yaml_dir(world_path / 'zon', 'name')
+
+    print(f"  Loaded names: {len(ROOM_NAMES)} rooms, {len(MOB_NAMES)} mobs, "
+          f"{len(OBJ_NAMES)} objs, {len(TRIGGER_NAMES)} triggers, {len(ZONE_NAMES)} zones")
 
 
 def parse_ascii_flags(flags_str, flag_names, planes=4):
@@ -312,7 +543,8 @@ def parse_mob_file(filepath):
             line = lines[idx].strip()
             idx += 1
 
-            if line == 'E' or line == 'S' or line.startswith('#'):
+            # Stop at next mob definition
+            if line.startswith('#') and line[1:].isdigit():
                 break
 
             if line.startswith('Str:'):
@@ -350,6 +582,7 @@ def parse_mob_file(filepath):
                     mob['triggers'].append(trig_vnum)
                 except (ValueError, IndexError):
                     pass
+            # 'E' and 'S' are end markers but triggers come after them, so don't break
 
         mobs.append(mob)
 
@@ -476,7 +709,9 @@ def mob_to_yaml(mob):
     if mob.get('triggers'):
         lines.append("triggers:")
         for trig in mob['triggers']:
-            lines.append(f"  - {trig}")
+            trig_name = get_trigger_name(trig)
+            comment = f"  # {trig_name}" if trig_name else ""
+            lines.append(f"  - {trig}{comment}")
 
     return '\n'.join(lines)
 
@@ -798,7 +1033,9 @@ def obj_to_yaml(obj):
     if obj.get('triggers'):
         lines.append("triggers:")
         for trig in obj['triggers']:
-            lines.append(f"  - {trig}")
+            trig_name = get_trigger_name(trig)
+            comment = f"  # {trig_name}" if trig_name else ""
+            lines.append(f"  - {trig}{comment}")
 
     return '\n'.join(lines)
 
@@ -1010,7 +1247,9 @@ def room_to_yaml(room):
             if 'key' in exit:
                 lines.append(f"    key: {exit['key']}")
             if 'to_room' in exit:
-                lines.append(f"    to_room: {exit['to_room']}")
+                room_name = get_room_name(exit['to_room'])
+                comment = f"  # {room_name}" if room_name else ""
+                lines.append(f"    to_room: {exit['to_room']}{comment}")
             if 'lock_complexity' in exit:
                 lines.append(f"    lock_complexity: {exit['lock_complexity']}")
     lines.append("")
@@ -1031,7 +1270,530 @@ def room_to_yaml(room):
     if room.get('triggers'):
         lines.append("triggers:")
         for trig in room['triggers']:
-            lines.append(f"  - {trig}")
+            trig_name = get_trigger_name(trig)
+            comment = f"  # {trig_name}" if trig_name else ""
+            lines.append(f"  - {trig}{comment}")
+
+    return '\n'.join(lines)
+
+
+def parse_trg_file(filepath):
+    """Parse a trigger file and return list of trigger dictionaries."""
+    triggers = []
+
+    try:
+        with open(filepath, 'r', encoding='koi8-r') as f:
+            content = f.read()
+    except:
+        try:
+            with open(filepath, 'r', encoding='cp1251') as f:
+                content = f.read()
+        except:
+            with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+                content = f.read()
+
+    # Split by #vnum
+    trg_blocks = re.split(r'^#(\d+)\s*$', content, flags=re.MULTILINE)
+
+    i = 1
+    while i < len(trg_blocks) - 1:
+        vnum = int(trg_blocks[i])
+        block = trg_blocks[i + 1]
+        i += 2
+
+        lines = block.strip().split('\n')
+        if len(lines) < 3:
+            continue
+
+        trigger = {'vnum': vnum}
+        idx = 0
+
+        # Parse name (may span multiple lines, ends with ~)
+        name_parts = []
+        while idx < len(lines):
+            line = lines[idx]
+            idx += 1
+            if line.rstrip() == '~':
+                break
+            if line.rstrip().endswith('~'):
+                name_parts.append(line.rstrip()[:-1].strip())
+                break
+            name_parts.append(line.strip())
+        trigger['name'] = ' '.join(name_parts)
+
+        # Parse type line: attach_type trigger_types narg add_flag
+        if idx < len(lines):
+            type_line = lines[idx]
+            parts = type_line.split()
+            idx += 1
+            if len(parts) >= 3:
+                try:
+                    attach_type = int(parts[0])
+                    trigger['attach_type'] = TRIGGER_ATTACH_TYPES[attach_type] if attach_type < len(TRIGGER_ATTACH_TYPES) else str(attach_type)
+                except ValueError:
+                    trigger['attach_type'] = parts[0]
+
+                # Parse trigger type letters
+                trigger_letters = parts[1]
+                trigger['trigger_types'] = []
+                for letter in trigger_letters:
+                    if letter in TRIGGER_TYPES:
+                        trigger['trigger_types'].append(TRIGGER_TYPES[letter])
+
+                try:
+                    trigger['narg'] = int(parts[2])
+                except ValueError:
+                    trigger['narg'] = 0
+
+                if len(parts) >= 4:
+                    try:
+                        trigger['add_flag'] = int(parts[3])
+                    except ValueError:
+                        trigger['add_flag'] = 0
+
+        # Parse arglist (ends with ~)
+        arglist_parts = []
+        while idx < len(lines):
+            line = lines[idx]
+            idx += 1
+            if line.rstrip() == '~':
+                break
+            if line.rstrip().endswith('~'):
+                arglist_parts.append(line.rstrip()[:-1])
+                break
+            arglist_parts.append(line)
+        trigger['arglist'] = ' '.join(arglist_parts)
+
+        # Parse script (ends with ~)
+        script_lines = []
+        while idx < len(lines):
+            line = lines[idx]
+            idx += 1
+            if line.rstrip() == '~':
+                break
+            if line.rstrip().endswith('~'):
+                script_lines.append(line.rstrip()[:-1])
+                break
+            script_lines.append(line)
+        trigger['script'] = '\n'.join(script_lines)
+
+        triggers.append(trigger)
+
+    return triggers
+
+
+def trg_to_yaml(trigger):
+    """Convert trigger dictionary to YAML string."""
+    lines = []
+    lines.append(f"# Trigger #{trigger['vnum']}")
+    lines.append(f"vnum: {trigger['vnum']}")
+    lines.append(f"name: \"{trigger['name']}\"")
+    lines.append("")
+
+    if 'attach_type' in trigger:
+        lines.append(f"attach_type: {trigger['attach_type']}")
+
+    if trigger.get('trigger_types'):
+        lines.append("trigger_types:")
+        for tt in trigger['trigger_types']:
+            lines.append(f"  - {tt}")
+
+    if 'narg' in trigger:
+        lines.append(f"narg: {trigger['narg']}")
+
+    if 'add_flag' in trigger:
+        lines.append(f"add_flag: {trigger['add_flag']}")
+
+    if trigger.get('arglist'):
+        lines.append(f"arglist: \"{trigger['arglist']}\"")
+    lines.append("")
+
+    # Script as multiline
+    if trigger.get('script'):
+        lines.append("script: |")
+        for script_line in trigger['script'].split('\n'):
+            lines.append(f"  {script_line}")
+
+    return '\n'.join(lines)
+
+
+def parse_zon_file(filepath):
+    """Parse a zone file and return zone dictionary."""
+    try:
+        with open(filepath, 'r', encoding='koi8-r') as f:
+            content = f.read()
+    except:
+        try:
+            with open(filepath, 'r', encoding='cp1251') as f:
+                content = f.read()
+        except:
+            with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+                content = f.read()
+
+    lines = content.strip().split('\n')
+    if len(lines) < 3:
+        return None
+
+    idx = 0
+
+    # Skip comment lines at start
+    while idx < len(lines) and (lines[idx].startswith('*') or lines[idx].startswith(';')):
+        idx += 1
+
+    # Zone vnum
+    if idx >= len(lines) or not lines[idx].startswith('#'):
+        return None
+
+    try:
+        zone_vnum = int(lines[idx][1:].split()[0])
+    except ValueError:
+        return None
+    idx += 1
+
+    zone = {'vnum': zone_vnum}
+
+    # Zone name (ends with ~)
+    name_parts = []
+    while idx < len(lines):
+        line = lines[idx]
+        idx += 1
+        if line.rstrip() == '~':
+            break
+        if line.rstrip().endswith('~'):
+            name_parts.append(line.rstrip()[:-1].strip())
+            break
+        name_parts.append(line.strip())
+    zone['name'] = ' '.join(name_parts)
+
+    # Builder info (optional, lines starting with ^, &, !, $)
+    zone['builders'] = {}
+    builder_prefixes = {'^': 'author', '&': 'coauthor', '!': 'tester', '$': 'description'}
+    while idx < len(lines):
+        line = lines[idx]
+        if line and line[0] in builder_prefixes:
+            key = builder_prefixes[line[0]]
+            value = line[1:].rstrip('~').strip()
+            zone['builders'][key] = value
+            idx += 1
+        else:
+            break
+
+    # Zone info line: #level type options top_room OR top_room lifespan reset_mode reset_idle
+    if idx < len(lines):
+        info_line = lines[idx].strip()
+        idx += 1
+
+        if info_line.startswith('#'):
+            # New format: #level type options top_room
+            parts = info_line[1:].split()
+            if len(parts) >= 4:
+                try:
+                    zone['level'] = int(parts[0])
+                    zone['zone_type'] = int(parts[1])
+                    zone['options'] = int(parts[2])
+                    zone['top_room'] = int(parts[3])
+                except ValueError:
+                    pass
+        else:
+            # Old format: top_room lifespan reset_mode reset_idle comment
+            parts = info_line.split()
+            if len(parts) >= 4:
+                try:
+                    zone['top_room'] = int(parts[0])
+                    zone['lifespan'] = int(parts[1])
+                    zone['reset_mode'] = int(parts[2])
+                    zone['reset_idle'] = int(parts[3])
+                except ValueError:
+                    pass
+
+    # Reset commands
+    zone['commands'] = []
+    while idx < len(lines):
+        line = lines[idx].strip()
+        idx += 1
+
+        if line == 'S' or line == '$':
+            break
+
+        if not line or line.startswith('*') or line.startswith(';'):
+            continue
+
+        # Parse command
+        parts = line.split()
+        if not parts:
+            continue
+
+        cmd_char = parts[0]
+        if cmd_char not in ZONE_CMD_TYPES:
+            continue
+
+        cmd = {'type': ZONE_CMD_TYPES[cmd_char]}
+
+        # Extract comment (in parentheses at end)
+        comment_match = re.search(r'\(([^)]+)\)\s*$', line)
+        if comment_match:
+            cmd['comment'] = comment_match.group(1)
+
+        # Parse command-specific args
+        try:
+            if cmd_char == 'M':  # Load mob: if_flag mob_vnum max_world room_vnum max_room
+                if len(parts) >= 6:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['mob_vnum'] = int(parts[2])
+                    cmd['max_world'] = int(parts[3])
+                    cmd['room_vnum'] = int(parts[4])
+                    cmd['max_room'] = int(parts[5])
+
+            elif cmd_char == 'O':  # Load obj: if_flag obj_vnum max room_vnum load_prob
+                if len(parts) >= 6:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['obj_vnum'] = int(parts[2])
+                    cmd['max'] = int(parts[3])
+                    cmd['room_vnum'] = int(parts[4])
+                    cmd['load_prob'] = int(parts[5])
+
+            elif cmd_char == 'G':  # Give to mob: if_flag obj_vnum max load_prob max_wear
+                if len(parts) >= 4:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['obj_vnum'] = int(parts[2])
+                    cmd['max'] = int(parts[3])
+                    if len(parts) >= 5:
+                        cmd['load_prob'] = int(parts[4])
+                    if len(parts) >= 6:
+                        cmd['max_wear'] = int(parts[5])
+
+            elif cmd_char == 'E':  # Equip mob: if_flag obj_vnum max wear_pos
+                if len(parts) >= 5:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['obj_vnum'] = int(parts[2])
+                    cmd['max'] = int(parts[3])
+                    cmd['wear_pos'] = parts[4]
+
+            elif cmd_char == 'P':  # Put in container: if_flag obj_vnum max container_vnum load_prob
+                if len(parts) >= 6:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['obj_vnum'] = int(parts[2])
+                    cmd['max'] = int(parts[3])
+                    cmd['container_vnum'] = int(parts[4])
+                    cmd['load_prob'] = int(parts[5])
+
+            elif cmd_char == 'D':  # Set door: if_flag room_vnum direction state key
+                if len(parts) >= 5:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['room_vnum'] = int(parts[2])
+                    direction = int(parts[3])
+                    cmd['direction'] = ZONE_DIRECTIONS[direction] if direction < len(ZONE_DIRECTIONS) else str(direction)
+                    cmd['state'] = int(parts[4])
+                    if len(parts) >= 6:
+                        cmd['key'] = int(parts[5])
+
+            elif cmd_char == 'R':  # Remove obj: if_flag room_vnum obj_vnum
+                if len(parts) >= 4:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['room_vnum'] = int(parts[2])
+                    cmd['obj_vnum'] = int(parts[3])
+
+            elif cmd_char == 'T':  # Attach trigger: if_flag trigger_type entity_vnum trigger_vnum
+                if len(parts) >= 5:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['trigger_type'] = int(parts[2])
+                    cmd['entity_vnum'] = int(parts[3])
+                    cmd['trigger_vnum'] = int(parts[4])
+
+            elif cmd_char == 'V':  # Set variable: if_flag type context vnum var_name var_value
+                if len(parts) >= 6:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['var_type'] = int(parts[2])
+                    cmd['context'] = int(parts[3])
+                    cmd['vnum'] = int(parts[4])
+                    cmd['var_name'] = parts[5]
+                    if len(parts) >= 7:
+                        cmd['var_value'] = ' '.join(parts[6:]).split('(')[0].strip()
+
+            elif cmd_char == 'Q':  # Special load: if_flag obj_vnum max_world room_vnum load_prob
+                if len(parts) >= 6:
+                    cmd['if_flag'] = int(parts[1])
+                    cmd['obj_vnum'] = int(parts[2])
+                    cmd['max_world'] = int(parts[3])
+                    cmd['room_vnum'] = int(parts[4])
+                    cmd['load_prob'] = int(parts[5])
+
+        except (ValueError, IndexError):
+            # Keep partial command
+            pass
+
+        zone['commands'].append(cmd)
+
+    return zone
+
+
+def zon_to_yaml(zone):
+    """Convert zone dictionary to YAML string."""
+    lines = []
+    lines.append(f"# Zone #{zone['vnum']}")
+    lines.append(f"vnum: {zone['vnum']}")
+    lines.append(f"name: \"{zone['name']}\"")
+    lines.append("")
+
+    # Builders
+    if zone.get('builders'):
+        lines.append("builders:")
+        for key, value in zone['builders'].items():
+            lines.append(f"  {key}: \"{value}\"")
+        lines.append("")
+
+    # Zone info
+    if 'level' in zone:
+        lines.append(f"level: {zone['level']}")
+    if 'zone_type' in zone:
+        lines.append(f"zone_type: {zone['zone_type']}")
+    if 'options' in zone:
+        lines.append(f"options: {zone['options']}")
+    if 'top_room' in zone:
+        lines.append(f"top_room: {zone['top_room']}")
+    if 'lifespan' in zone:
+        lines.append(f"lifespan: {zone['lifespan']}")
+    if 'reset_mode' in zone:
+        lines.append(f"reset_mode: {zone['reset_mode']}")
+    if 'reset_idle' in zone:
+        lines.append(f"reset_idle: {zone['reset_idle']}")
+    lines.append("")
+
+    # Commands
+    if zone.get('commands'):
+        lines.append("commands:")
+        for cmd in zone['commands']:
+            cmd_type = cmd.get('type', 'UNKNOWN')
+            lines.append(f"  - type: {cmd_type}")
+
+            if 'if_flag' in cmd:
+                lines.append(f"    if_flag: {cmd['if_flag']}")
+
+            # Command-specific fields with name comments
+            if cmd_type == 'LOAD_MOB':
+                if 'mob_vnum' in cmd:
+                    name = get_mob_name(cmd['mob_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    mob_vnum: {cmd['mob_vnum']}{comment}")
+                if 'max_world' in cmd:
+                    lines.append(f"    max_world: {cmd['max_world']}")
+                if 'room_vnum' in cmd:
+                    name = get_room_name(cmd['room_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    room_vnum: {cmd['room_vnum']}{comment}")
+                if 'max_room' in cmd:
+                    lines.append(f"    max_room: {cmd['max_room']}")
+
+            elif cmd_type == 'LOAD_OBJ':
+                if 'obj_vnum' in cmd:
+                    name = get_obj_name(cmd['obj_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    obj_vnum: {cmd['obj_vnum']}{comment}")
+                if 'max' in cmd:
+                    lines.append(f"    max: {cmd['max']}")
+                if 'room_vnum' in cmd:
+                    name = get_room_name(cmd['room_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    room_vnum: {cmd['room_vnum']}{comment}")
+                if 'load_prob' in cmd:
+                    lines.append(f"    load_prob: {cmd['load_prob']}")
+
+            elif cmd_type == 'GIVE_OBJ':
+                if 'obj_vnum' in cmd:
+                    name = get_obj_name(cmd['obj_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    obj_vnum: {cmd['obj_vnum']}{comment}")
+                if 'max' in cmd:
+                    lines.append(f"    max: {cmd['max']}")
+                if 'load_prob' in cmd:
+                    lines.append(f"    load_prob: {cmd['load_prob']}")
+                if 'max_wear' in cmd:
+                    lines.append(f"    max_wear: {cmd['max_wear']}")
+
+            elif cmd_type == 'EQUIP_MOB':
+                if 'obj_vnum' in cmd:
+                    name = get_obj_name(cmd['obj_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    obj_vnum: {cmd['obj_vnum']}{comment}")
+                if 'max' in cmd:
+                    lines.append(f"    max: {cmd['max']}")
+                if 'wear_pos' in cmd:
+                    lines.append(f"    wear_pos: {cmd['wear_pos']}")
+
+            elif cmd_type == 'PUT_IN_OBJ':
+                if 'obj_vnum' in cmd:
+                    name = get_obj_name(cmd['obj_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    obj_vnum: {cmd['obj_vnum']}{comment}")
+                if 'max' in cmd:
+                    lines.append(f"    max: {cmd['max']}")
+                if 'container_vnum' in cmd:
+                    name = get_obj_name(cmd['container_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    container_vnum: {cmd['container_vnum']}{comment}")
+                if 'load_prob' in cmd:
+                    lines.append(f"    load_prob: {cmd['load_prob']}")
+
+            elif cmd_type == 'SET_DOOR':
+                if 'room_vnum' in cmd:
+                    name = get_room_name(cmd['room_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    room_vnum: {cmd['room_vnum']}{comment}")
+                if 'direction' in cmd:
+                    lines.append(f"    direction: {cmd['direction']}")
+                if 'state' in cmd:
+                    lines.append(f"    state: {cmd['state']}")
+                if 'key' in cmd:
+                    lines.append(f"    key: {cmd['key']}")
+
+            elif cmd_type == 'REMOVE_OBJ':
+                if 'room_vnum' in cmd:
+                    name = get_room_name(cmd['room_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    room_vnum: {cmd['room_vnum']}{comment}")
+                if 'obj_vnum' in cmd:
+                    name = get_obj_name(cmd['obj_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    obj_vnum: {cmd['obj_vnum']}{comment}")
+
+            elif cmd_type == 'ATTACH_TRIGGER':
+                if 'trigger_type' in cmd:
+                    lines.append(f"    trigger_type: {cmd['trigger_type']}")
+                if 'entity_vnum' in cmd:
+                    lines.append(f"    entity_vnum: {cmd['entity_vnum']}")
+                if 'trigger_vnum' in cmd:
+                    name = get_trigger_name(cmd['trigger_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    trigger_vnum: {cmd['trigger_vnum']}{comment}")
+
+            elif cmd_type == 'SET_VARIABLE':
+                if 'var_type' in cmd:
+                    lines.append(f"    var_type: {cmd['var_type']}")
+                if 'context' in cmd:
+                    lines.append(f"    context: {cmd['context']}")
+                if 'vnum' in cmd:
+                    lines.append(f"    vnum: {cmd['vnum']}")
+                if 'var_name' in cmd:
+                    lines.append(f"    var_name: \"{cmd['var_name']}\"")
+                if 'var_value' in cmd:
+                    lines.append(f"    var_value: \"{cmd['var_value']}\"")
+
+            elif cmd_type == 'SPEC_LOAD':
+                if 'obj_vnum' in cmd:
+                    name = get_obj_name(cmd['obj_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    obj_vnum: {cmd['obj_vnum']}{comment}")
+                if 'max_world' in cmd:
+                    lines.append(f"    max_world: {cmd['max_world']}")
+                if 'room_vnum' in cmd:
+                    name = get_room_name(cmd['room_vnum'])
+                    comment = f"  # {name}" if name else ""
+                    lines.append(f"    room_vnum: {cmd['room_vnum']}{comment}")
+                if 'load_prob' in cmd:
+                    lines.append(f"    load_prob: {cmd['load_prob']}")
+
+            if 'comment' in cmd:
+                lines.append(f"    # {cmd['comment']}")
 
     return '\n'.join(lines)
 
@@ -1070,6 +1832,24 @@ def convert_file(input_path, output_path, file_type):
                 f.write(yaml_content)
             print(f"  Created {entity_path}")
 
+    elif file_type == 'zon':
+        zone = parse_zon_file(input_path)
+        if zone:
+            yaml_content = zon_to_yaml(zone)
+            entity_path = os.path.join(os.path.dirname(output_path), f"{zone['vnum']}.yaml")
+            with open(entity_path, 'w', encoding='koi8-r') as f:
+                f.write(yaml_content)
+            print(f"  Created {entity_path}")
+
+    elif file_type == 'trg':
+        entities = parse_trg_file(input_path)
+        for entity in entities:
+            yaml_content = trg_to_yaml(entity)
+            entity_path = os.path.join(os.path.dirname(output_path), f"{entity['vnum']}.yaml")
+            with open(entity_path, 'w', encoding='koi8-r') as f:
+                f.write(yaml_content)
+            print(f"  Created {entity_path}")
+
     else:
         print(f"  Skipping unsupported file type: {file_type}")
 
@@ -1079,20 +1859,39 @@ def convert_directory(input_dir, output_dir):
     input_path = Path(input_dir)
     output_path = Path(output_dir)
 
+    # Build name registries first for cross-references
+    print("Building name registries...")
+    build_name_registries(input_dir)
+
     # Process mob files
+    print("\nConverting mob files...")
     for mob_file in input_path.glob('mob/*.mob'):
         out_dir = output_path / 'mob'
         convert_file(str(mob_file), str(out_dir / 'dummy.yaml'), 'mob')
 
     # Process obj files
+    print("\nConverting obj files...")
     for obj_file in input_path.glob('obj/*.obj'):
         out_dir = output_path / 'obj'
         convert_file(str(obj_file), str(out_dir / 'dummy.yaml'), 'obj')
 
     # Process wld files
+    print("\nConverting wld files...")
     for wld_file in input_path.glob('wld/*.wld'):
         out_dir = output_path / 'wld'
         convert_file(str(wld_file), str(out_dir / 'dummy.yaml'), 'wld')
+
+    # Process zon files
+    print("\nConverting zon files...")
+    for zon_file in input_path.glob('zon/*.zon'):
+        out_dir = output_path / 'zon'
+        convert_file(str(zon_file), str(out_dir / 'dummy.yaml'), 'zon')
+
+    # Process trg files
+    print("\nConverting trg files...")
+    for trg_file in input_path.glob('trg/*.trg'):
+        out_dir = output_path / 'trg'
+        convert_file(str(trg_file), str(out_dir / 'dummy.yaml'), 'trg')
 
 
 def main():
