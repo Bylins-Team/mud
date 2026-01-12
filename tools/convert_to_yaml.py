@@ -165,7 +165,11 @@ def parse_mob_file(filepath):
 
     i = 1  # Skip first empty element
     while i < len(mob_blocks) - 1:
-        vnum = int(mob_blocks[i])
+        try:
+            vnum = int(mob_blocks[i])
+        except ValueError:
+            i += 2
+            continue
         block = mob_blocks[i + 1]
         i += 2
 
@@ -234,7 +238,10 @@ def parse_mob_file(filepath):
             if len(flags_line) >= 3:
                 mob['action_flags'] = parse_ascii_flags(flags_line[0], ACTION_FLAGS)
                 mob['affect_flags'] = parse_ascii_flags(flags_line[1], [])  # TODO: affected_bits
-                mob['alignment'] = int(flags_line[2])
+                try:
+                    mob['alignment'] = int(flags_line[2])
+                except ValueError:
+                    mob['alignment'] = 0  # Default if malformed
                 if len(flags_line) >= 4:
                     mob['mob_type'] = flags_line[3]
 
@@ -282,15 +289,19 @@ def parse_mob_file(filepath):
             idx += 1
 
             if len(pos_line) >= 3:
-                default_pos = int(pos_line[0])
-                start_pos = int(pos_line[1])
-                sex = int(pos_line[2])
+                try:
+                    default_pos = int(pos_line[0])
+                    start_pos = int(pos_line[1])
+                    sex = int(pos_line[2])
 
-                mob['position'] = {
-                    'default': POSITIONS[default_pos] if default_pos < len(POSITIONS) else str(default_pos),
-                    'start': POSITIONS[start_pos] if start_pos < len(POSITIONS) else str(start_pos)
-                }
-                mob['sex'] = GENDERS[sex] if sex < len(GENDERS) else str(sex)
+                    mob['position'] = {
+                        'default': POSITIONS[default_pos] if default_pos < len(POSITIONS) else str(default_pos),
+                        'start': POSITIONS[start_pos] if start_pos < len(POSITIONS) else str(start_pos)
+                    }
+                    mob['sex'] = GENDERS[sex] if sex < len(GENDERS) else str(sex)
+                except (ValueError, IndexError):
+                    mob['position'] = {'default': 'kStanding', 'start': 'kStanding'}
+                    mob['sex'] = 'kMale'
 
         # Parse E-spec attributes
         mob['attributes'] = {}
@@ -334,8 +345,11 @@ def parse_mob_file(filepath):
                         'value': int(parts[2])
                     })
             elif line.startswith('T '):
-                trig_vnum = int(line.split()[1])
-                mob['triggers'].append(trig_vnum)
+                try:
+                    trig_vnum = int(line.split()[1])
+                    mob['triggers'].append(trig_vnum)
+                except (ValueError, IndexError):
+                    pass
 
         mobs.append(mob)
 
@@ -822,9 +836,20 @@ def parse_wld_file(filepath):
         idx = 0
 
         # Parse name (ending with ~)
-        name = lines[idx].rstrip('~')
-        room['name'] = name
-        idx += 1
+        # Name may span multiple lines - read until ~ is found, join with space
+        # This also handles edge case where ~ is on separate line
+        name_parts = []
+        while idx < len(lines):
+            line = lines[idx]
+            idx += 1
+            if line.rstrip() == '~':
+                # Standalone ~ terminates name
+                break
+            if line.rstrip().endswith('~'):
+                name_parts.append(line.rstrip()[:-1].strip())
+                break
+            name_parts.append(line.strip())
+        room['name'] = ' '.join(name_parts)
 
         # Parse description (until ~)
         desc_lines = []
@@ -844,10 +869,16 @@ def parse_wld_file(filepath):
             parts = lines[idx].split()
             idx += 1
             if len(parts) >= 3:
-                room['zone'] = int(parts[0])
+                try:
+                    room['zone'] = int(parts[0])
+                except ValueError:
+                    room['zone'] = 0
                 room['room_flags'] = parse_ascii_flags(parts[1], ROOM_FLAGS)
-                sector = int(parts[2])
-                room['sector'] = SECTORS[sector] if sector < len(SECTORS) else str(sector)
+                try:
+                    sector = int(parts[2])
+                    room['sector'] = SECTORS[sector] if sector < len(SECTORS) else str(sector)
+                except ValueError:
+                    room['sector'] = 'kInside'
 
         # Parse exits and other data
         room['exits'] = []
@@ -887,11 +918,16 @@ def parse_wld_file(filepath):
                     parts = lines[idx].split()
                     idx += 1
                     if len(parts) >= 3:
-                        exit_data['exit_flags'] = int(parts[0])
-                        exit_data['key'] = int(parts[1])
-                        exit_data['to_room'] = int(parts[2])
-                        if len(parts) >= 4:
-                            exit_data['lock_complexity'] = int(parts[3])
+                        try:
+                            exit_data['exit_flags'] = int(parts[0])
+                            exit_data['key'] = int(parts[1])
+                            exit_data['to_room'] = int(parts[2])
+                            if len(parts) >= 4:
+                                exit_data['lock_complexity'] = int(parts[3])
+                        except ValueError:
+                            exit_data['exit_flags'] = 0
+                            exit_data['key'] = -1
+                            exit_data['to_room'] = -1
 
                 room['exits'].append(exit_data)
 
