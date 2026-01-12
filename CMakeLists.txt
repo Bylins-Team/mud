@@ -97,6 +97,7 @@ set(SOURCES
 		src/utils/levenshtein.cpp
 		src/gameplay/mechanics/liquid.cpp
 		src/utils/logger.cpp
+		src/utils/message_capture.cpp
 		src/gameplay/magic/magic.cpp
 		src/gameplay/magic/magic_items.cpp
 		src/gameplay/magic/magic_rooms.cpp
@@ -576,6 +577,7 @@ set(HEADERS
 		src/utils/levenshtein.h
 		src/gameplay/mechanics/liquid.h
 		src/utils/logger.h
+		src/utils/message_capture.h
 		src/gameplay/magic/magic.h
 		src/gameplay/magic/magic_items.h
 		src/gameplay/magic/magic_rooms.h
@@ -1300,6 +1302,22 @@ target_link_libraries(circle circle.library)
 option(BUILD_TESTS "Build and run tests." YES)
 if (BUILD_TESTS)
 	add_subdirectory(tests)
+endif ()
+
+# Identify Export Tool
+option(BUILD_IDENTIFY_EXPORT "Build identify-export tool (exports item data to SQLite)." NO)
+if (BUILD_IDENTIFY_EXPORT)
+	message(STATUS "Building identify-export tool")
+	add_subdirectory(tools/identify-export)
+	# Place binary in the same directory as main circle executable
+	set_target_properties(identify-export PROPERTIES
+		RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+		RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}"
+		RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}"
+		RUNTIME_OUTPUT_DIRECTORY_TEST "${CMAKE_BINARY_DIR}"
+		RUNTIME_OUTPUT_DIRECTORY_FASTTEST "${CMAKE_BINARY_DIR}")
+else ()
+	message(STATUS "Skipping identify-export tool (use -DBUILD_IDENTIFY_EXPORT=ON to enable)")
 endif ()
 
 # vim: set ts=4 sw=4 ai tw=0 noet syntax=cmake :
