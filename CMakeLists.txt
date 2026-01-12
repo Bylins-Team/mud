@@ -38,6 +38,7 @@ set(SOURCES
 		src/engine/boot/constants_mapper.cpp
 		src/engine/boot/yaml_loaders.cpp
 		src/engine/boot/yaml_data_files.cpp
+		src/engine/boot/yaml_boot_loader.cpp
 		src/utils/cache.cpp
 		src/gameplay/mechanics/celebrates.cpp
 		src/engine/entities/char_data.cpp
@@ -525,6 +526,7 @@ set(HEADERS
 		src/engine/boot/constants_mapper.h
 		src/engine/boot/yaml_loaders.h
 		src/engine/boot/yaml_data_files.h
+		src/engine/boot/yaml_boot_loader.h
 		src/utils/cache.h
 		src/gameplay/mechanics/celebrates.h
 		src/engine/entities/char_data.h

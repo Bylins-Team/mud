@@ -509,6 +509,16 @@ RoomData* LoadRoom(const std::string& filename, const ConstantsMapper& mapper) {
 	room->vnum = vnum;
 	room->zone_rn = GetYamlValue<int>(doc, "zone", 0);
 
+	// п≤п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟я┌я▄ п©п╬п╩я▐ п╨п╟п╨ п╡ legacy loader
+	room->func = nullptr;
+	room->contents = nullptr;
+	room->track = nullptr;
+	room->light = 0;
+	room->fires = 0;
+	room->gdark = 0;
+	room->glight = 0;
+	room->proto_script.reset(new ObjData::triggers_list_t());
+
 	// п²п╟п╥п╡п╟п╫п╦п╣
 	std::string name_str = GetYamlValue<std::string>(doc, "name", "");
 	if (!name_str.empty()) {
@@ -581,17 +591,21 @@ RoomData* LoadRoom(const std::string& filename, const ConstantsMapper& mapper) {
 			// п║п╩п╬п╤п╫п╬я│я┌я▄ п╥п╟п╪п╨п╟
 			exit_data->lock_complexity = GetYamlValue<int>(exit_node, "lock_complexity", 0);
 
-			// п╓п╩п╟пЁп╦ п╡я▀я┘п╬п╢п╟ (exit_bits)
-			std::vector<std::string> exit_flags_list = GetYamlStringList(exit_node, "flags");
-			if (!exit_flags_list.empty()) {
-				byte exit_flags = 0;
-				for (const auto& flag_name : exit_flags_list) {
-					int flag_index = mapper.FindNameIndex(flag_name, exit_bits);
-					if (flag_index >= 0) {
-						exit_flags |= (1 << flag_index);
+			// п╓п╩п╟пЁп╦ п╡я▀я┘п╬п╢п╟ - п╪п╬п╤п╣я┌ п╠я▀я┌я▄ exit_flags (я┤п╦я│п╩п╬) п╦п╩п╦ flags (я│п©п╦я│п╬п╨)
+			if (exit_node["exit_flags"]) {
+				exit_data->exit_info = GetYamlValue<int>(exit_node, "exit_flags", 0);
+			} else {
+				std::vector<std::string> exit_flags_list = GetYamlStringList(exit_node, "flags");
+				if (!exit_flags_list.empty()) {
+					byte exit_flags = 0;
+					for (const auto& flag_name : exit_flags_list) {
+						int flag_index = mapper.FindNameIndex(flag_name, exit_bits);
+						if (flag_index >= 0) {
+							exit_flags |= (1 << flag_index);
+						}
 					}
+					exit_data->exit_info = exit_flags;
 				}
-				exit_data->exit_info = exit_flags;
 			}
 
 			room->dir_option[dir] = exit_data;
@@ -627,10 +641,9 @@ RoomData* LoadRoom(const std::string& filename, const ConstantsMapper& mapper) {
 		}
 	}
 
-	// п╒я─п╦пЁпЁп╣я─я▀
+	// п╒я─п╦пЁпЁп╣я─я▀ (proto_script я┐п╤п╣ п╦п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟п╫ п╡я▀я┬п╣)
 	YAML::Node triggers = doc["triggers"];
 	if (triggers && triggers.IsSequence()) {
-		room->proto_script = std::make_shared<ObjData::triggers_list_t>();
 		for (const auto& trig_node : triggers) {
 			try {
 				ObjVnum trig_vnum = trig_node.as<int>();
