@@ -1,0 +1,49 @@
+# Object #112
+vnum: 112
+
+names:
+  aliases: "простой меч"
+  nominative: "простой меч"
+  genitive: "простого меча"
+  dative: "простому мечу"
+  accusative: "простой меч"
+  instrumental: "простым мечом"
+  prepositional: "простом мече"
+
+descriptions:
+  room: "Простой меч лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 143
+durability:
+  maximum: 100
+  current: 100
+material: 9
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+extra_flags:
+  - kAntiGood
+  - kAntiEvil
+wear_flags:
+  - kTake
+  - kWield
+  - kHold
+  - kBoth
+
+values:
+  value0: 0
+  value1: 1
+  value2: 5
+  value3: 7
+
+weight: 5
+cost: 10
+rent:
+  off: 0
+  on: 0
+
+max_in_world: 10000

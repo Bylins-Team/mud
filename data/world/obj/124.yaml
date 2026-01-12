@@ -1,0 +1,42 @@
+# Object #124
+vnum: 124
+
+names:
+  aliases: "кольчужный шлем"
+  nominative: "кольчужный шлем"
+  genitive: "кольчужного шлема"
+  dative: "кольчужному шлему"
+  accusative: "кольчужный шлем"
+  instrumental: "кольчужным шлемом"
+  prepositional: "кольчужном шлеме"
+
+descriptions:
+  room: "Кольчужный шлем лежит тут."
+  action: ""
+
+type: kOther
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 3
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+  - kHead
+
+values:
+  value0: 1
+  value1: 1
+  value2: 0
+  value3: 0
+
+weight: 3
+cost: 45
+rent:
+  off: 45
+  on: 3

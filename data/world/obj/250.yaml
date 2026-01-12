@@ -1,0 +1,45 @@
+# Object #250
+vnum: 250
+
+names:
+  aliases: "доска объявлений для богов"
+  nominative: "доска для сообщений богов"
+  genitive: "доски объявлений"
+  dative: "доске объявлений"
+  accusative: "доску объявлений"
+  instrumental: "доской объявлений"
+  prepositional: "доске объявлений"
+
+descriptions:
+  room: "Доска для сообщений богов летает тут"
+  action: ""
+
+type: kMoney
+spec_param: 0
+durability:
+  maximum: 150
+  current: 150
+material: 9
+sex: kFemale
+timer: 43200
+spell: -1
+level: 0
+
+extra_flags:
+  - kGlow
+  - kMagic
+  - kAntiMage
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0
+
+max_in_world: 10000

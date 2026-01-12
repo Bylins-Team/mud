@@ -35,6 +35,9 @@ set(SOURCES
 		src/engine/boot/boot_constants.cpp
 		src/engine/boot/boot_data_files.cpp
 		src/engine/boot/boot_index.cpp
+		src/engine/boot/constants_mapper.cpp
+		src/engine/boot/yaml_loaders.cpp
+		src/engine/boot/yaml_data_files.cpp
 		src/utils/cache.cpp
 		src/gameplay/mechanics/celebrates.cpp
 		src/engine/entities/char_data.cpp
@@ -519,6 +522,9 @@ set(HEADERS
 		src/engine/boot/boot_constants.h
 		src/engine/boot/boot_data_files.h
 		src/engine/boot/boot_index.h
+		src/engine/boot/constants_mapper.h
+		src/engine/boot/yaml_loaders.h
+		src/engine/boot/yaml_data_files.h
 		src/utils/cache.h
 		src/gameplay/mechanics/celebrates.h
 		src/engine/entities/char_data.h
@@ -1180,6 +1186,12 @@ if (HAVE_TG)
 	if (NOT CURL_FOUND)
 		set(HAVE_TG "NO")
 	endif()
+
+	# YAML support for world files
+	find_package(yaml-cpp REQUIRED)
+	if (NOT yaml-cpp_FOUND)
+		message(FATAL_ERROR "yaml-cpp library not found. Install with: sudo apt-get install libyaml-cpp-dev")
+	endif()
 	if (HAVE_TG)
 		add_definitions("-DHAVE_TG")
 #		set(Boost_USE_MULTITHREADED ON)
@@ -1196,7 +1208,8 @@ include_directories(src
 	system ${PYTHON_INCLUDE_DIRS})
 target_link_libraries(circle.library
 	${Boost_LIBRARIES}
-	${PYTHON_LIBRARIES})
+	${PYTHON_LIBRARIES}
+	yaml-cpp)
 
 # Prepare options for test build
 set(TESTBUILD_DEFINITIONS "-DNOCRYPT -DTEST_BUILD")

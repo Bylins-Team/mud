@@ -1,0 +1,40 @@
+# Room #136
+vnum: 136
+zone: 1
+
+name: "&Y__Прибежище Руевита&n"
+
+description: |
+     Вы оказались в просторном светлом зале с очень высоким потолком. Залитый
+  ярким светом желтых шаров неизвестного происхождения и устройства, в центре
+  зала стоит дубовый идол. Тишина и абсолютная неподвижность воздуха кажутся
+  странными и неестественными.  
+
+room_flags:
+  - kDarked
+  - kNoPk
+  - kIndoors
+  - kExchangeRoom
+sector: kInside
+
+exits:
+  - direction: kEast
+    exit_flags: 0
+    key: 0
+    to_room: 0
+    lock_complexity: 0
+  - direction: kWest
+    exit_flags: 1
+    key: 0
+    to_room: 103
+    lock_complexity: 0
+  - direction: kUp
+    exit_flags: 1
+    key: 0
+    to_room: 100
+    lock_complexity: 0
+  - direction: kDown
+    exit_flags: 1
+    key: 0
+    to_room: 20962
+    lock_complexity: 0

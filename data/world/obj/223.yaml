@@ -1,0 +1,43 @@
+# Object #223
+vnum: 223
+
+names:
+  aliases: "руна воды"
+  nominative: "руна воды"
+  genitive: "руны воды"
+  dative: "руне воды"
+  accusative: "руну воды"
+  instrumental: "руной воды"
+  prepositional: "руне воды"
+
+descriptions:
+  room: "Магическая руна лежит тут на земле."
+  action: ""
+
+type: kSpellbook
+spec_param: 19
+durability:
+  maximum: 100
+  current: 90
+material: 12
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 223
+  value2: 1000
+  value3: 0
+
+weight: 1
+cost: 10
+rent:
+  off: 10
+  on: 10
+
+max_in_world: 100000

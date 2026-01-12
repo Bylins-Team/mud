@@ -1,0 +1,41 @@
+# Object #4007
+vnum: 4007
+
+names:
+  aliases: "баночка"
+  nominative: "баночка"
+  genitive: "баночки"
+  dative: "баночке"
+  accusative: "баночку"
+  instrumental: "баночкой"
+  prepositional: "баночке"
+
+descriptions:
+  room: "Баночка оставлена здесь кем-то."
+  action: ""
+
+type: kPen
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 11
+sex: kFemale
+timer: 5000
+spell: 0
+level: 0
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 30
+  value1: 30
+  value2: 24
+  value3: 1
+
+weight: 31
+cost: 100
+rent:
+  off: 1
+  on: 1

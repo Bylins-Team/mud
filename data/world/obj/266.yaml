@@ -1,0 +1,46 @@
+# Object #266
+vnum: 266
+
+names:
+  aliases: "красна цепь"
+  nominative: "красна цепь"
+  genitive: "красна цепь"
+  dative: "красна цепь"
+  accusative: "красна цепь"
+  instrumental: "красна цепь"
+  prepositional: "красна цепь"
+
+descriptions:
+  room: "Длинное описание"
+  action: ""
+
+type: kContainer
+spec_param: 0
+durability:
+  maximum: 1000
+  current: 0
+material: 4
+sex: kNeutral
+timer: 90000
+spell: 0
+level: 0
+
+wear_flags:
+  - kTake
+  - kNeck
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 1
+cost: 10
+rent:
+  off: 100
+  on: 10
+
+applies:
+  - location: kCha
+    modifier: 10

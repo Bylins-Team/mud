@@ -1,0 +1,45 @@
+# Object #121
+vnum: 121
+
+names:
+  aliases: "простая палица"
+  nominative: "простая палица"
+  genitive: "простой палицы"
+  dative: "простой палице"
+  accusative: "простую палицу"
+  instrumental: "простой палицей"
+  prepositional: "простой палице"
+
+descriptions:
+  room: "Палица лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 141
+durability:
+  maximum: 100
+  current: 90
+material: 9
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+extra_flags:
+  - kAntiGood
+  - kAntiEvil
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 1
+  value2: 5
+  value3: 5
+
+weight: 5
+cost: 5
+rent:
+  off: 0
+  on: 0

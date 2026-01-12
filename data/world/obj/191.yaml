@@ -1,0 +1,50 @@
+# Object #191
+vnum: 191
+
+names:
+  aliases: "хрустальный трон"
+  nominative: "хрустальный трон"
+  genitive: "хрустального трона"
+  dative: "хрустальному трону"
+  accusative: "хрустальный трон"
+  instrumental: "хрустальным троном"
+  prepositional: "хрустальном троне"
+
+descriptions:
+  room: "Хрустальный трон величественно стоит тут."
+  action: |
+    Трон, выточенный из целой друзы горного хрусталя, переливается всеми оттенками
+    синего и фиолетового. На спинке трона восседает Ворон. У подножия растянулся
+    огромный Волк. Небрежно брошенные лазурные подушки наводят на мысль, что трон
+    явно женский.
+
+type: kLightSource
+spec_param: 0
+durability:
+  maximum: 500
+  current: 500
+material: 7
+sex: kNeutral
+timer: 49999
+spell: -1
+level: 0
+
+extra_flags:
+  - kHum
+  - kAntiMage
+  - kAntiVigilant
+  - kNoRent
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 10000
+cost: 10
+rent:
+  off: 10
+  on: 10
+
+max_in_world: 1

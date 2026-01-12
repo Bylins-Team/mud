@@ -1,0 +1,42 @@
+# Object #188
+vnum: 188
+
+names:
+  aliases: "перстень любви"
+  nominative: "перстень Любви"
+  genitive: "перстеня Любви"
+  dative: "перстеню Любви"
+  accusative: "перстень Любви"
+  instrumental: "перстенем Любви"
+  prepositional: "перстене Любви"
+
+descriptions:
+  room: "Перстень с огромным камнем в центре неприметно лежит здесь."
+  action: ""
+
+type: kOther
+spec_param: 0
+durability:
+  maximum: 500
+  current: 500
+material: 6
+sex: kNeutral
+timer: 2000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kFinger
+
+values:
+  value0: 20
+  value1: 20
+  value2: 0
+  value3: 0
+
+weight: 10
+cost: 10
+rent:
+  off: 10
+  on: 10

@@ -1,0 +1,42 @@
+# Object #138
+vnum: 138
+
+names:
+  aliases: "свиток познания"
+  nominative: "свиток познания"
+  genitive: "свитка познания"
+  dative: "свитку познания"
+  accusative: "свиток познания"
+  instrumental: "свитком познания"
+  prepositional: "свитке познания"
+
+descriptions:
+  room: "Свиток познания лежит тут."
+  action: ""
+
+type: kScroll
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 17
+sex: kMale
+timer: 43200
+spell: 201
+level: 30
+
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 0
+  value1: 351
+  value2: -1
+  value3: -1
+
+weight: 1
+cost: 110
+rent:
+  off: 110
+  on: 110

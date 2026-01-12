@@ -1,0 +1,41 @@
+# Object #313
+vnum: 313
+
+names:
+  aliases: "гибкая палка"
+  nominative: "гибкая палка"
+  genitive: "гибкой палки"
+  dative: "гибкой палке"
+  accusative: "гибкую палку"
+  instrumental: "гибкой палкой"
+  prepositional: "гибкой палке"
+
+descriptions:
+  room: "Гибкая палка лежит здесь."
+  action: ""
+
+type: kSpellbook
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 9
+sex: kFemale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 313
+  value2: 0
+  value3: 0
+
+weight: 15
+cost: 10
+rent:
+  off: 5
+  on: 5

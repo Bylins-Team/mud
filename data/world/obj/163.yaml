@@ -1,0 +1,47 @@
+# Object #163
+vnum: 163
+
+names:
+  aliases: "маленький кинжал"
+  nominative: "маленький кинжал"
+  genitive: "маленького кинжала"
+  dative: "маленькому кинжалу"
+  accusative: "маленький кинжал"
+  instrumental: "маленьким кинжалом"
+  prepositional: "маленьком кинжале"
+
+descriptions:
+  room: "Небольшой короткий кинжал лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 144
+durability:
+  maximum: 100
+  current: 100
+material: 4
+sex: kMale
+timer: 43200
+spell: -1
+level: 0
+
+extra_flags:
+  - kAntiGood
+wear_flags:
+  - kTake
+  - kWield
+  - kHold
+
+values:
+  value0: 0
+  value1: 1
+  value2: 5
+  value3: 11
+
+weight: 3
+cost: 10
+rent:
+  off: 10
+  on: 0
+
+max_in_world: 100000

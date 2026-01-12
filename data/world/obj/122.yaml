@@ -1,0 +1,46 @@
+# Object #122
+vnum: 122
+
+names:
+  aliases: "простой нож"
+  nominative: "простой нож"
+  genitive: "простого ножа"
+  dative: "простому ножу"
+  accusative: "простой нож"
+  instrumental: "простым ножом"
+  prepositional: "простом ноже"
+
+descriptions:
+  room: "Обычный длинный нож лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 144
+durability:
+  maximum: 100
+  current: 90
+material: 2
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+extra_flags:
+  - kAntiGood
+  - kAntiEvil
+wear_flags:
+  - kTake
+  - kWield
+  - kHold
+
+values:
+  value0: 0
+  value1: 1
+  value2: 4
+  value3: 11
+
+weight: 6
+cost: 0
+rent:
+  off: 0
+  on: 0

@@ -1,0 +1,27 @@
+# Room #185
+vnum: 185
+zone: 1
+
+name: "Комната смертной доски"
+
+description: |
+  ___Большая мраморная комната. По углам стоят четыре белыx колонны, уходя высоко в потолок.
+  Пол весь покрыт плиткой с замысловатыми рисунками. Перед доской стоят четыре стула и маленький
+  круглый столик.
+
+room_flags:
+  - kIndoors
+  - kNoMagic
+  - kNoTeleportIn
+  - kIndoors
+  - kNoArmor
+  - kDominationArena
+  - kNoBirdArrival
+sector: kInside
+
+exits:
+  - direction: kSouth
+    exit_flags: 0
+    key: 0
+    to_room: 100
+    lock_complexity: 0

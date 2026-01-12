@@ -1,0 +1,43 @@
+# Room #100
+vnum: 100
+zone: 1
+
+name: "Тронный зал."
+
+description: |
+     Величественные мраморные колонны уходят ввысь, подпирая самое небо.  На стенах,
+  отделанных редчайшими сортами мрамора красуются барельефы, изображающие бытие
+  обитателей замка - охоту на Жар-Птицу, воскрешение Змея Горыныча, зверски
+  изрубленного Ильей Муромцем после очередной попойки, пленение Змея Тугарина и
+  многое другое. В центре зала - огромный дубовый стол, покрытый скатертью-самобранкой.
+
+room_flags:
+  - kIndoors
+  - kNoMagic
+  - kIndoors
+  - kNoArmor
+  - kDominationArena
+  - kNoBirdArrival
+sector: kInside
+
+exits:
+  - direction: kNorth
+    exit_flags: 0
+    key: 0
+    to_room: 185
+    lock_complexity: 0
+  - direction: kEast
+    exit_flags: 0
+    key: 0
+    to_room: 1100
+    lock_complexity: 0
+  - direction: kSouth
+    exit_flags: 0
+    key: 0
+    to_room: 184
+    lock_complexity: 0
+  - direction: kDown
+    exit_flags: 0
+    key: 0
+    to_room: 104
+    lock_complexity: 0

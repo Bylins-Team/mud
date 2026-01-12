@@ -1,0 +1,46 @@
+# Object #167
+vnum: 167
+
+names:
+  aliases: "простой лук"
+  nominative: "простой лук"
+  genitive: "простого лука"
+  dative: "простому луку"
+  accusative: "простой лук"
+  instrumental: "простым луком"
+  prepositional: "простом луке"
+
+descriptions:
+  room: "Небольшой простенький лук лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 154
+durability:
+  maximum: 75
+  current: 75
+material: 9
+sex: kMale
+timer: 43200
+spell: -1
+level: 0
+
+extra_flags:
+  - kAntiGood
+wear_flags:
+  - kTake
+  - kBoth
+
+values:
+  value0: 0
+  value1: 2
+  value2: 6
+  value3: 9
+
+weight: 10
+cost: 20
+rent:
+  off: 20
+  on: 0
+
+max_in_world: 100000

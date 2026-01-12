@@ -1,0 +1,26 @@
+# Room #4043
+vnum: 4043
+zone: 40
+
+name: "Мельня"
+
+description: |
+     Посреди комнаты, занимая ее почти всю, крутятся два тяжелых каменных
+  колеса, приводимые в движение хитрым механизмом, установленным в реке.
+  Гул стоит такой, что ничего невозможно услышать на расстоянии вытянутой
+  руки.
+
+room_flags:
+  - kIndoors
+  - kSoundproof
+sector: kCity
+
+exits:
+  - direction: kEast
+    exit_flags: 0
+    key: -1
+    to_room: 4051
+  - direction: kSouth
+    exit_flags: 0
+    key: -1
+    to_room: 4000

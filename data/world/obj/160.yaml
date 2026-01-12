@@ -1,0 +1,44 @@
+# Object #160
+vnum: 160
+
+names:
+  aliases: "обручальное кольцо"
+  nominative: "обручальное кольцо"
+  genitive: "обручального кольца"
+  dative: "обручальному кольцу"
+  accusative: "обручальное кольцо"
+  instrumental: "обручальным кольцом"
+  prepositional: "обручальном кольце"
+
+descriptions:
+  room: "Маленькое золотое колечко лежит тут."
+  action: ""
+
+type: kContainer
+spec_param: 0
+durability:
+  maximum: 500
+  current: 500
+material: 6
+sex: kNeutral
+timer: 999999
+spell: -1
+level: 0
+
+extra_flags:
+  - kAntiMage
+wear_flags:
+  - kTake
+  - kFinger
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 1
+cost: 1
+rent:
+  off: 1
+  on: 1

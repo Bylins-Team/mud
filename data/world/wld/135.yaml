@@ -1,0 +1,44 @@
+# Room #135
+vnum: 135
+zone: 1
+
+name: "&KПокои Переплута&n"
+
+description: |
+  ___Вы оказались в странном месте, заполненом туманом и серыми тенями, окружающими
+  вас со всех сторон, извивающимися в медленном танце и тающих в темноте, одна за другой.
+  Отовсюду слышатся шорохи и стук падающих капель, серые тени, только что казавшиеся
+  бесплотными призраками, вдруг обретают форму и цвет, представая жуткими чудовищами, или 
+  бастионами громадного, тонущего во мгле замка, но налетающий порыв ветра вновь заставляет
+  наваждение расплыться клубами густого тумана и мириадами миражей.&n
+
+room_flags:
+  - kDarked
+  - kIndoors
+  - kNoTeleportIn
+  - kGodRoom
+  - kNoArmor
+  - kDominationArena
+sector: kInside
+
+exits:
+  - direction: kEast
+    exit_flags: 16
+    key: 0
+    to_room: 27018
+    lock_complexity: 0
+  - direction: kWest
+    exit_flags: 16
+    key: 0
+    to_room: 4056
+    lock_complexity: 0
+  - direction: kUp
+    exit_flags: 16
+    key: 0
+    to_room: 100
+    lock_complexity: 0
+  - direction: kDown
+    exit_flags: 16
+    key: 0
+    to_room: 49987
+    lock_complexity: 0

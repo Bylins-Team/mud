@@ -1,0 +1,44 @@
+# Object #148
+vnum: 148
+
+names:
+  aliases: "лучина"
+  nominative: "лучина"
+  genitive: "лучины"
+  dative: "лучине"
+  accusative: "лучину"
+  instrumental: "лучиной"
+  prepositional: "лучине"
+
+descriptions:
+  room: "Лучина догорает здесь."
+  action: ""
+
+type: kLightSource
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 8
+sex: kFemale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 0
+  value1: 0
+  value2: 7
+  value3: 0
+
+weight: 5
+cost: 15
+rent:
+  off: 10
+  on: 7
+
+max_in_world: 100000

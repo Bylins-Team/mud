@@ -1,0 +1,45 @@
+# Object #259
+vnum: 259
+
+names:
+  aliases: "доска объявлений"
+  nominative: "доска объявлений"
+  genitive: "доски объявлений"
+  dative: "доске объявлений"
+  accusative: "доску объявлений"
+  instrumental: "доской объявлений"
+  prepositional: "доске объявлений"
+
+descriptions:
+  room: "Доска для написания сообщений билдеров прибита тут"
+  action: ""
+
+type: kMoney
+spec_param: 0
+durability:
+  maximum: 150
+  current: 150
+material: 9
+sex: kFemale
+timer: 43200
+spell: -1
+level: 0
+
+extra_flags:
+  - kGlow
+  - kMagic
+  - kAntiMage
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0
+
+max_in_world: 1

@@ -1,0 +1,49 @@
+# Object #4004
+vnum: 4004
+
+names:
+  aliases: "карта окрестностей лесной деревни"
+  nominative: "карта окрестностей лесной деревни"
+  genitive: "карты окрестностей лесной деревни"
+  dative: "карте окрестностей лесной деревни"
+  accusative: "карту окрестностей лесной деревни"
+  instrumental: "картой окрестностей лесной деревни"
+  prepositional: "карте окрестностей лесной деревни"
+
+descriptions:
+  room: "Карта окрестностей лесной деревни лежит здесь."
+  action: ""
+
+type: kNote
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 17
+sex: kFemale
+timer: 240
+spell: -1
+level: 0
+
+extra_flags:
+  - kNoRent
+  - kAntiGood
+  - kAntiEvil
+  - kAntiPoly
+wear_flags:
+  - kTake
+  - kBoth
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 1
+cost: 10
+rent:
+  off: 0
+  on: 0
+
+max_in_world: 100000

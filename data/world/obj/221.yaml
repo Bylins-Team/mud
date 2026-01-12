@@ -1,0 +1,41 @@
+# Object #221
+vnum: 221
+
+names:
+  aliases: "руна небес"
+  nominative: "Руна небес"
+  genitive: "руны небес"
+  dative: "руне небес"
+  accusative: "руну небес"
+  instrumental: "руной небес"
+  prepositional: "руне небес"
+
+descriptions:
+  room: "Магическая руна лежит тут на земле."
+  action: ""
+
+type: kSpellbook
+spec_param: 19
+durability:
+  maximum: 100
+  current: 90
+material: 12
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 221
+  value2: 1000
+  value3: 0
+
+weight: 1
+cost: 100
+rent:
+  off: 50
+  on: 50

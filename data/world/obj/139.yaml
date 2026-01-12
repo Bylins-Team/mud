@@ -1,0 +1,42 @@
+# Object #139
+vnum: 139
+
+names:
+  aliases: "свиток возврата"
+  nominative: "свиток возврата"
+  genitive: "свитка возврата"
+  dative: "свитку возврата"
+  accusative: "свиток возврата"
+  instrumental: "свитком возврата"
+  prepositional: "свитке возврата"
+
+descriptions:
+  room: "Свиток возврата лежит тут."
+  action: ""
+
+type: kScroll
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 17
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 0
+  value1: 42
+  value2: -1
+  value3: -1
+
+weight: 1
+cost: 25
+rent:
+  off: 10
+  on: 10

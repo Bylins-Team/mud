@@ -1,0 +1,42 @@
+# Object #171
+vnum: 171
+
+names:
+  aliases: "длинный батог"
+  nominative: "длинный батог"
+  genitive: "длинного батога"
+  dative: "длинному батогу"
+  accusative: "длинный батог"
+  instrumental: "длинным батогом"
+  prepositional: "длинном батоге"
+
+descriptions:
+  room: "Длинный батог лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 145
+durability:
+  maximum: 30
+  current: 30
+material: 8
+sex: kMale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 1
+  value2: 8
+  value3: 6
+
+weight: 4
+cost: 60
+rent:
+  off: 60
+  on: 4

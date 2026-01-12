@@ -1,0 +1,37 @@
+# Room #132
+vnum: 132
+zone: 1
+
+name: "Покои покойного Кродо"
+
+description: "Покойное Кродо покоится в своих покоях..."
+
+room_flags:
+  - kNoTeleportIn
+  - kGodRoom
+  - kMoOnlyRoom
+  - kExchangeRoom
+  - kNoArmor
+sector: kSecret
+
+exits:
+  - direction: kNorth
+    exit_flags: 0
+    key: 0
+    to_room: 185
+    lock_complexity: 0
+  - direction: kSouth
+    exit_flags: 0
+    key: 0
+    to_room: 184
+    lock_complexity: 0
+  - direction: kUp
+    exit_flags: 0
+    key: 0
+    to_room: 100
+    lock_complexity: 0
+  - direction: kDown
+    exit_flags: 0
+    key: 0
+    to_room: 104
+    lock_complexity: 0

@@ -1,0 +1,47 @@
+# Mob #4057
+vnum: 4057
+
+names:
+  aliases: "жирная крыса bigrat"
+  nominative: "жирная крыса"
+  genitive: "жирной крысы"
+  dative: "жирной крысе"
+  accusative: "жирную крысу"
+  instrumental: "жирной крысой"
+  prepositional: "жирной крысе"
+
+descriptions:
+  short: "Жирная крыса сидит здесь. (нагло ухмыляется)"
+  long: "СПАЙ!!!"
+
+action_flags:
+  - kSentinel
+  - kIsNpc
+alignment: -100
+mob_type: E
+
+
+gold:
+  dice_count: 0
+  dice_size: 0
+  bonus: 0
+experience: 0
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kFemale
+
+attributes:
+  strength: 20
+  dexterity: 35
+  intelligence: 30
+  wisdom: 20
+  constitution: 14
+  charisma: 3
+
+size: 30
+mob_class: 100
+race: 104
+height: 198
+weight: 200

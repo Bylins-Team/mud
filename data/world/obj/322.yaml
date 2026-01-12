@@ -1,0 +1,41 @@
+# Object #322
+vnum: 322
+
+names:
+  aliases: "кусок мяса"
+  nominative: "кусок мяса"
+  genitive: "куска мяса"
+  dative: "куску мяса"
+  accusative: "кусок мяса"
+  instrumental: "куском мяса"
+  prepositional: "куске мяса"
+
+descriptions:
+  room: "Кусок мяса лежит здесь."
+  action: ""
+
+type: kFountain
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 16
+sex: kMale
+timer: 1800
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 12
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 2
+cost: 4
+rent:
+  off: 0
+  on: 0

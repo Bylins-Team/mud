@@ -1,0 +1,44 @@
+# Object #107
+vnum: 107
+
+names:
+  aliases: "бронзовый меч"
+  nominative: "бронзовый меч"
+  genitive: "бронзового меча"
+  dative: "бронзовому мечу"
+  accusative: "бронзовый меч"
+  instrumental: "бронзовым мечом"
+  prepositional: "бронзовом мече"
+
+descriptions:
+  room: "Бронзовый меч лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 143
+durability:
+  maximum: 100
+  current: 100
+material: 2
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 2
+  value2: 5
+  value3: 3
+
+weight: 14
+cost: 70
+rent:
+  off: 70
+  on: 40
+
+max_in_world: 10000

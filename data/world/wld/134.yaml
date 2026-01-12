@@ -1,0 +1,50 @@
+# Room #134
+vnum: 134
+zone: 1
+
+name: "&BПокои Поренута&n"
+
+description: |
+  ___Вы оказались на вершине морской горы, вздымающейся необъятной громадой
+  откуда-то из иссиня-черной бездны. Изящные колонны из жемчуга и янтаря
+  поддерживают легкий свод, в который впечатались окаменелые стебли водорослей.
+  Под сводом, в центре усыпаной мелким белым песком площадки высится громадный
+  золотой трон хозяина морей, ступенями которому служат гигантские раковины.
+  Зеленоватый свет мерцает и переливается между колоннами, озаряя изображенную
+  на внутреней поверхности купола картину чудовищной морской бури, обрушивающейся
+  на окруженный семью стенами город в центре огромного острова.
+
+room_flags:
+  - kIndoors
+  - kPeaceFul
+  - kNoTeleportIn
+  - kGodRoom
+  - kDominationArena
+sector: kInside
+
+exits:
+  - direction: kNorth
+    exit_flags: 16
+    key: 0
+    to_room: 133
+    lock_complexity: 0
+  - direction: kEast
+    exit_flags: 16
+    key: 0
+    to_room: 186
+    lock_complexity: 0
+  - direction: kSouth
+    exit_flags: 16
+    key: 0
+    to_room: 49987
+    lock_complexity: 0
+  - direction: kUp
+    exit_flags: 16
+    key: 0
+    to_room: 100
+    lock_complexity: 0
+  - direction: kDown
+    exit_flags: 16
+    key: 0
+    to_room: 101
+    lock_complexity: 0

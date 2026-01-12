@@ -1,0 +1,41 @@
+# Object #162
+vnum: 162
+
+names:
+  aliases: "носовой платочек"
+  nominative: "носовой платочек с рюшами"
+  genitive: "носового платочка с рюшами"
+  dative: "носовому платочку с рюшами"
+  accusative: "носовой платочек с рюшами"
+  instrumental: "носовым платочком с рюшами"
+  prepositional: "носовом платочке с рюшами"
+
+descriptions:
+  room: "Носовой платочек с рюшами позабыт кем-то."
+  action: ""
+
+type: kScroll
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 14
+sex: kNeutral
+timer: 300
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 30
+  value1: 1
+  value2: 1
+  value3: 1
+
+weight: 1
+cost: 1
+rent:
+  off: 1
+  on: 1

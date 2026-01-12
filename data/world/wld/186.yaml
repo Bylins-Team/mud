@@ -1,0 +1,31 @@
+# Room #186
+vnum: 186
+zone: 1
+
+name: "Недоделанная комната"
+
+description: "Вы оказались в комнате, наполненной обломками творческих мыслей КОДЕРА."
+
+room_flags:
+  - kIndoors
+  - kPeaceFul
+  - kNoMagic
+  - kNoTeleportIn
+  - kIndoors
+  - kExchangeRoom
+  - kNoArmor
+  - kDominationArena
+  - kNoBirdArrival
+sector: kInside
+
+exits:
+  - direction: kNorth
+    exit_flags: 0
+    key: 0
+    to_room: 104
+    lock_complexity: 0
+  - direction: kEast
+    exit_flags: 0
+    key: 0
+    to_room: 0
+    lock_complexity: 0

@@ -1,0 +1,42 @@
+# Object #142
+vnum: 142
+
+names:
+  aliases: "колба серой"
+  nominative: "колба с серой жидкостью"
+  genitive: "колбы с серой жидкостью"
+  dative: "колбе с серой жидкостью"
+  accusative: "колбу с серой жидкостью"
+  instrumental: "колбой с серой жидкостью"
+  prepositional: "колбе с серой жидкостью"
+
+descriptions:
+  room: "Колба серого цвета лежит тут."
+  action: ""
+
+type: kTrash
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 11
+sex: kFemale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 0
+  value1: 43
+  value2: -1
+  value3: -1
+
+weight: 1
+cost: 20
+rent:
+  off: 15
+  on: 10

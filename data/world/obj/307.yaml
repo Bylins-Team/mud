@@ -1,0 +1,42 @@
+# Object #307
+vnum: 307
+
+names:
+  aliases: "кольчуга"
+  nominative: "кольчуга"
+  genitive: "кольчуги"
+  dative: "кольчуге"
+  accusative: "кольчугу"
+  instrumental: "кольчугой"
+  prepositional: "кольчуге"
+
+descriptions:
+  room: "Кольчуга валяется тут."
+  action: ""
+
+type: kOther
+spec_param: 0
+durability:
+  maximum: -1
+  current: 0
+material: 3
+sex: kFemale
+timer: 30000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kBody
+
+values:
+  value0: 10
+  value1: 10
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 150
+rent:
+  off: 120
+  on: 100

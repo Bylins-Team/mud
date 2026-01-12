@@ -1,0 +1,41 @@
+# Object #226
+vnum: 226
+
+names:
+  aliases: "руна богов"
+  nominative: "Руна богов"
+  genitive: "руны богов"
+  dative: "руне богов"
+  accusative: "руну богов"
+  instrumental: "руной богов"
+  prepositional: "руне богов"
+
+descriptions:
+  room: "Магическая руна лежит тут на земле."
+  action: ""
+
+type: kSpellbook
+spec_param: 19
+durability:
+  maximum: 100
+  current: 90
+material: 12
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 226
+  value2: 1000
+  value3: 0
+
+weight: 1
+cost: 100
+rent:
+  off: 50
+  on: 50

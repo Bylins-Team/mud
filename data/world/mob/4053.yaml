@@ -1,0 +1,112 @@
+# Mob #4053
+vnum: 4053
+
+names:
+  aliases: "Делан моб"
+  nominative: "Делан"
+  genitive: "Делана"
+  dative: "Делану"
+  accusative: "Делана"
+  instrumental: "Деланом"
+  prepositional: "Делане"
+
+descriptions:
+  short: "Дух восставшего из делета Опытного Кайсяку Делана (бывшего боярина НД) летает здесь."
+  long: |
+    Над Ленгом, где скалистые вершины
+    Штурмуют неприступный небосвод,
+    С приходом ночи зарево встает,
+    Вселяя ужас в жителей долины.
+    Легенда намекает на маяк,
+    Где в скорбном одиночестве тоскует
+    И с Хаосом о вечности толкует
+    Последний из Древнейших, миру враг.
+    Лицо его закрыто желтой маской,
+    Чьи шелковые складки выдают
+    Черты столь фантастичные, что люд
+    Издревле говорит о них с опаской.
+    _
+    Делан одет :
+    <в правой руке>             призрачный кинжал
+    <в левой руке>              заточка
+
+action_flags:
+  - kSentinel
+  - kIsNpc
+  - kNoSleep
+alignment: -800
+mob_type: E
+
+stats:
+  level: 3
+  hitroll_penalty: 20
+  armor: 1
+  hp:
+    dice_count: 0
+    dice_size: 0
+    bonus: 1
+  damage:
+    dice_count: 1
+    dice_size: 1
+    bonus: 1
+
+gold:
+  dice_count: 0
+  dice_size: 0
+  bonus: 0
+experience: 0
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kMale
+
+attributes:
+  strength: 50
+  dexterity: 3
+  intelligence: 20
+  wisdom: 20
+  constitution: 25
+  charisma: 25
+
+size: 30
+mob_class: 102
+race: 101
+height: 198
+weight: 200
+
+skills:
+  - skill_id: 3
+    value: 140
+  - skill_id: 5
+    value: 200
+  - skill_id: 22
+    value: 200
+  - skill_id: 133
+    value: 125
+  - skill_id: 136
+    value: 90
+  - skill_id: 138
+    value: 125
+  - skill_id: 140
+    value: 120
+  - skill_id: 141
+    value: 120
+  - skill_id: 142
+    value: 120
+  - skill_id: 143
+    value: 120
+  - skill_id: 144
+    value: 120
+  - skill_id: 145
+    value: 120
+  - skill_id: 146
+    value: 120
+  - skill_id: 147
+    value: 120
+  - skill_id: 148
+    value: 120
+  - skill_id: 149
+    value: 90
+  - skill_id: 157
+    value: 125

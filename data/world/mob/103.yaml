@@ -1,0 +1,54 @@
+# Mob #103
+vnum: 103
+
+names:
+  aliases: "дракон костяной порождение ужаса"
+  nominative: "костяной дракон"
+  genitive: "костяного дракона"
+  dative: "костяному дракону"
+  accusative: "костяного дракона"
+  instrumental: "костяным драконом"
+  prepositional: "костяном драконе"
+
+descriptions:
+  short: "Костяной дракон, порождение Ужаса, готов разорвать любого по приказу хозяина."
+  long: "Ужасное исчадие Тьмы, поднятое страшной магией крови."
+
+action_flags:
+  - kIsNpc
+  - kNoBash
+  - kNoBlind
+  - kFireCreature
+  - kFlying
+alignment: -600
+mob_type: E
+
+
+gold:
+  dice_count: 0
+  dice_size: 0
+  bonus: 0
+experience: 0
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kMale
+
+attributes:
+  strength: 22
+  dexterity: 20
+  intelligence: 10
+  wisdom: 10
+  constitution: 3
+  charisma: 10
+
+size: 85
+mob_class: 100
+race: 105
+height: 200
+weight: 150
+
+skills:
+  - skill_id: 136
+    value: 75

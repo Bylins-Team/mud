@@ -1,0 +1,44 @@
+# Object #190
+vnum: 190
+
+names:
+  aliases: "камень огромный имена"
+  nominative: "огромный камень"
+  genitive: "огромного камня"
+  dative: "огромному камню"
+  accusative: "огромный камень"
+  instrumental: "огромным камнем"
+  prepositional: "огромном камне"
+
+descriptions:
+  room: "Огромный Камень, исписанный зловещими рунами, лежит тут"
+  action: ""
+
+type: kBandage
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 12
+sex: kNeutral
+timer: 43200
+spell: -1
+level: 0
+
+extra_flags:
+  - kGlow
+  - kHum
+
+values:
+  value0: 999
+  value1: 999
+  value2: 1
+  value3: 0
+
+weight: 1004
+cost: 0
+rent:
+  off: 0
+  on: 0
+
+max_in_world: 1

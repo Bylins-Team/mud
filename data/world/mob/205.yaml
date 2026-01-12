@@ -1,0 +1,55 @@
+# Mob #205
+vnum: 205
+
+names:
+  aliases: "чармис пятого уровня"
+  nominative: "чармис пятого уровня дамагер"
+  genitive: "чармиса пятого уровня"
+  dative: "чармису пятого уровня"
+  accusative: "чармиса пятого уровня"
+  instrumental: "чармисом пятого уровня"
+  prepositional: "чармисе пятого уровня"
+
+descriptions:
+  short: "Это просто чармис пятого уровня"
+  long: ""
+
+action_flags:
+  - kIsNpc
+alignment: 600
+mob_type: E
+
+stats:
+  level: 5
+  hitroll_penalty: 14
+  armor: 9
+  hp:
+    dice_count: 5
+    dice_size: 9
+    bonus: 25
+  damage:
+    dice_count: 1
+    dice_size: 4
+    bonus: 3
+
+gold:
+  dice_count: 0
+  dice_size: 0
+  bonus: 0
+experience: 360
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kMale
+
+
+size: 35
+mob_class: 100
+race: 100
+height: 198
+weight: 150
+
+skills:
+  - skill_id: 136
+    value: 15

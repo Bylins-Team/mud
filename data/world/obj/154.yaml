@@ -1,0 +1,41 @@
+# Object #154
+vnum: 154
+
+names:
+  aliases: "статуя ленин"
+  nominative: "статуя вождя революции"
+  genitive: "статуи вождя революции"
+  dative: "статуе вождя революции"
+  accusative: "статую вождя революции"
+  instrumental: "статуей вождя революции"
+  prepositional: "статуе вождя революции"
+
+descriptions:
+  room: "Зажав в левой руке кепку, правую длань выставив вперед, ВЕЛИКИЙ ВОЖДЬ смотрит на Вас с укором."
+  action: ""
+
+type: kKey
+spec_param: 0
+durability:
+  maximum: 5000
+  current: 5000
+material: 0
+sex: kMale
+timer: 40000
+spell: 0
+level: 0
+
+extra_flags:
+  - kAntiMage
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0

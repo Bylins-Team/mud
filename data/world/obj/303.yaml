@@ -1,0 +1,43 @@
+# Object #303
+vnum: 303
+
+names:
+  aliases: "нож"
+  nominative: "нож"
+  genitive: "ножа"
+  dative: "ножу"
+  accusative: "нож"
+  instrumental: "ножом"
+  prepositional: "ноже"
+
+descriptions:
+  room: "Нож брошен здесь за ненадобностью."
+  action: ""
+
+type: kWeapon
+spec_param: 147
+durability:
+  maximum: 65000
+  current: 0
+material: 3
+sex: kMale
+timer: 30000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+  - kHold
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 7
+
+weight: 1
+cost: 100
+rent:
+  off: 75
+  on: 25

@@ -1,0 +1,59 @@
+# Room #103
+vnum: 103
+zone: 1
+
+name: "Комната для незарегистрированных игроков, играющих через прокси."
+
+description: |
+     Еще одна забава нынешних правителей. По словам очевидцев - есть у них
+  комната, все выходы из которой зачарованы - куда бы ты ни пошел - обязательно
+  возвращаешься сюда же. Немало народу полегло здесь, пока смилостившиеся хозяева
+  не снизойдут до путника и не разорвут этот заколдованный круг.
+  ___&RЕсли Вы здесь оказались - значит в игре уже есть персонаж с Вашего IP!&n
+  Если Вы играете из клуба, сети, используете прокси, а так же не "мультите",
+  то можете просить Богов зарегистрировать Вас.
+  При этом полезно будет указать кто именно и почему находится с Вами с 1го адреса,
+  Это значительно ускорит регистрацию.
+  ___&WПросто так никто никого не регистрирует! Приятного времяпровождения!&n
+
+room_flags:
+  - kPeaceFul
+  - kNoMagic
+  - kNoTeleportIn
+  - kExchangeRoom
+  - kNoArmor
+  - kDominationArena
+  - kNoBirdArrival
+sector: kCity
+
+exits:
+  - direction: kNorth
+    exit_flags: 0
+    key: -1
+    to_room: 103
+    lock_complexity: 0
+  - direction: kEast
+    exit_flags: 0
+    key: -1
+    to_room: 103
+    lock_complexity: 0
+  - direction: kSouth
+    exit_flags: 0
+    key: -1
+    to_room: 103
+    lock_complexity: 0
+  - direction: kWest
+    exit_flags: 0
+    key: -1
+    to_room: 103
+    lock_complexity: 0
+  - direction: kUp
+    exit_flags: 0
+    key: -1
+    to_room: 103
+    lock_complexity: 0
+  - direction: kDown
+    exit_flags: 0
+    key: -1
+    to_room: 103
+    lock_complexity: 0

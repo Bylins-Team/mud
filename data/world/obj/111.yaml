@@ -1,0 +1,44 @@
+# Object #111
+vnum: 111
+
+names:
+  aliases: "большая алебарда"
+  nominative: "большая алебарда"
+  genitive: "большой алебарды"
+  dative: "большой алебарде"
+  accusative: "большую алебарду"
+  instrumental: "большой алебардой"
+  prepositional: "большой алебарде"
+
+descriptions:
+  room: "Топор на длинной рукоятке лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 146
+durability:
+  maximum: 100
+  current: 100
+material: 2
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+  - kBoth
+
+values:
+  value0: 0
+  value1: 3
+  value2: 5
+  value3: 3
+
+weight: 18
+cost: 50
+rent:
+  off: 50
+  on: 30
+
+max_in_world: 10000

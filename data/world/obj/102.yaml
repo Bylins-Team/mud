@@ -1,0 +1,43 @@
+# Object #102
+vnum: 102
+
+names:
+  aliases: "вяленое мясо"
+  nominative: "вяленое мясо"
+  genitive: "вяленого мяса"
+  dative: "вяленому мясу"
+  accusative: "вяленое мясо"
+  instrumental: "вяленым мясом"
+  prepositional: "вяленом мясе"
+
+descriptions:
+  room: "Большой кусок вяленого мяса лежит тут."
+  action: ""
+
+type: kFountain
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 0
+sex: kNeutral
+timer: 2000
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 16
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 2
+cost: 10
+rent:
+  off: 2
+  on: 2
+
+max_in_world: 100000

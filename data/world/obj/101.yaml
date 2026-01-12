@@ -1,0 +1,41 @@
+# Object #101
+vnum: 101
+
+names:
+  aliases: "ломоть хлеб"
+  nominative: "ломоть хлеба"
+  genitive: "ломтя хлеба"
+  dative: "ломтю хлеба"
+  accusative: "ломоть хлеба"
+  instrumental: "ломтем хлеба"
+  prepositional: "ломте хлеба"
+
+descriptions:
+  room: "Небольшая краюшка хлеба лежит тут."
+  action: ""
+
+type: kFountain
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 0
+sex: kMale
+timer: 900
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 6
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 1
+cost: 1
+rent:
+  off: 1
+  on: 1

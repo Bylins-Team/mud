@@ -1,0 +1,42 @@
+# Object #304
+vnum: 304
+
+names:
+  aliases: "топор"
+  nominative: "топор"
+  genitive: "топора"
+  dative: "топору"
+  accusative: "топор"
+  instrumental: "топором"
+  prepositional: "топоре"
+
+descriptions:
+  room: "Брошенный топор ржавеет тут."
+  action: ""
+
+type: kWeapon
+spec_param: 142
+durability:
+  maximum: -1
+  current: 0
+material: 0
+sex: kMale
+timer: 30000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 3
+
+weight: 0
+cost: 150
+rent:
+  off: 120
+  on: 100

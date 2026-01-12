@@ -1,0 +1,43 @@
+# Object #175
+vnum: 175
+
+names:
+  aliases: "простой самострел"
+  nominative: "простой самострел"
+  genitive: "простого самострела"
+  dative: "простому самострелу"
+  accusative: "простой самострел"
+  instrumental: "простым самострелом"
+  prepositional: "простом самостреле"
+
+descriptions:
+  room: "Странное оружие с тетивой и курком на рукояти лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 154
+durability:
+  maximum: 75
+  current: 75
+material: 8
+sex: kMale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+  - kBoth
+
+values:
+  value0: 0
+  value1: 2
+  value2: 4
+  value3: 9
+
+weight: 16
+cost: 100
+rent:
+  off: 100
+  on: 10

@@ -1,0 +1,44 @@
+# Object #4002
+vnum: 4002
+
+names:
+  aliases: "объявление доска"
+  nominative: "объявление"
+  genitive: "объявления"
+  dative: "объявлению"
+  accusative: "объявление"
+  instrumental: "объявлением"
+  prepositional: "объявлении"
+
+descriptions:
+  room: "Вы видите прибитое к доске  около прилавка объявление."
+  action: ""
+
+type: kNote
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 0
+sex: kNeutral
+timer: 43200
+spell: -1
+level: 0
+
+extra_flags:
+  - kNoInvis
+  - kAntiMage
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 1
+cost: 0
+rent:
+  off: 0
+  on: 0
+
+max_in_world: 1

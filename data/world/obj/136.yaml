@@ -1,0 +1,42 @@
+# Object #136
+vnum: 136
+
+names:
+  aliases: "мех"
+  nominative: "мех"
+  genitive: "меха"
+  dative: "меху"
+  accusative: "мех"
+  instrumental: "мехом"
+  prepositional: "мехе"
+
+descriptions:
+  room: "Кожаный мех для различных жидкостей лежит тут."
+  action: ""
+
+type: kPen
+spec_param: 0
+durability:
+  maximum: 75
+  current: 75
+material: 15
+sex: kMale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kShoulders
+
+values:
+  value0: 25
+  value1: 25
+  value2: 0
+  value3: 0
+
+weight: 30
+cost: 10
+rent:
+  off: 10
+  on: 2

@@ -1,0 +1,44 @@
+# Object #172
+vnum: 172
+
+names:
+  aliases: "стальной меч"
+  nominative: "стальной меч"
+  genitive: "стального меча"
+  dative: "стальному мечу"
+  accusative: "стальной меч"
+  instrumental: "стальным мечом"
+  prepositional: "стальном мече"
+
+descriptions:
+  room: "Стальной меч лежит здесь."
+  action: ""
+
+type: kWeapon
+spec_param: 143
+durability:
+  maximum: 75
+  current: 75
+material: 4
+sex: kMale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+  - kHold
+  - kBoth
+
+values:
+  value0: 0
+  value1: 2
+  value2: 3
+  value3: 3
+
+weight: 12
+cost: 56
+rent:
+  off: 56
+  on: 4

@@ -1,0 +1,41 @@
+# Object #134
+vnum: 134
+
+names:
+  aliases: "железный сундук"
+  nominative: "железный сундук"
+  genitive: "железного сундука"
+  dative: "железному сундуку"
+  accusative: "железный сундук"
+  instrumental: "железным сундуком"
+  prepositional: "железном сундуке"
+
+descriptions:
+  room: "Большой железный сундук стоит у Вас под ногами."
+  action: ""
+
+type: kFood
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 3
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 250
+  value1: 0
+  value2: -1
+  value3: 0
+
+weight: 5
+cost: 20
+rent:
+  off: 20
+  on: 5

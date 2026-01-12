@@ -1,0 +1,35 @@
+# Room #4056
+vnum: 4056
+zone: 40
+
+name: "Гостиный двор"
+
+description: |
+  ___После дороги дальней, посидев за чарой зелена вина, да погутарив со
+  друзьями - товарищами о подвигах ратных да о девицах красных, нет ничего
+  краше, чем растянуться на перине, на пуховой да забыться сном богатырским.
+  Вот и облюбовали себе сей двор послы дальнеземные, да богатыри заезжие для 
+  отдохновения от забот и сует мирских.
+  &GСовсем малых, да необученных так и тянет &Yвойти &Gв &Yшколу&G.&n
+
+room_flags:
+  - kIndoors
+  - kPeaceFul
+  - kMoOnlyRoom
+  - kNoSummon
+  - kNoTeleportOut
+  - kNoBattle
+  - kSlowDeathTrap
+  - kArena
+  - kNoWeather
+  - kDeathIceTrap
+  - kNoPk
+  - kIceTrap
+  - kDecayedDeathTrap
+sector: kCity
+
+exits:
+  - direction: kEast
+    exit_flags: 0
+    key: -1
+    to_room: 4014

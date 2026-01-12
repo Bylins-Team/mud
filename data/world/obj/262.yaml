@@ -1,0 +1,42 @@
+# Object #262
+vnum: 262
+
+names:
+  aliases: "рубль"
+  nominative: "рубль"
+  genitive: "рубля"
+  dative: "рублю"
+  accusative: "рубль"
+  instrumental: "рублем"
+  prepositional: "рубле"
+
+descriptions:
+  room: "Грязная бумажка валяется в пыли."
+  action: ""
+
+type: kLiquidContainer
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 17
+sex: kMale
+timer: 43200
+spell: 0
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 1
+rent:
+  off: 0
+  on: 0

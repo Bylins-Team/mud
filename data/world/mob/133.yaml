@@ -1,0 +1,70 @@
+# Mob #133
+vnum: 133
+
+names:
+  aliases: "сильный раб"
+  nominative: "раб"
+  genitive: "раба"
+  dative: "рабу"
+  accusative: "раба"
+  instrumental: "рабом"
+  prepositional: "рабе"
+
+descriptions:
+  short: "Мужчина в лохмотьях, но с гордо поднятой головой стоит здесь."
+  long: "Наверное, беглый раб"
+
+action_flags:
+  - kSentinel
+  - kIsNpc
+  - kAware
+  - kWaterCreature
+  - kSwimming
+alignment: 0
+mob_type: E
+
+
+gold:
+  dice_count: 0
+  dice_size: 0
+  bonus: 0
+experience: 100000
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kMale
+
+attributes:
+  strength: 25
+  dexterity: 35
+  intelligence: 25
+  wisdom: 25
+  constitution: 45
+  charisma: 40
+
+size: 60
+mob_class: 100
+race: 100
+height: 198
+weight: 200
+
+skills:
+  - skill_id: 4
+    value: 200
+  - skill_id: 22
+    value: 200
+  - skill_id: 131
+    value: 150
+  - skill_id: 132
+    value: 200
+  - skill_id: 136
+    value: 90
+  - skill_id: 137
+    value: 200
+  - skill_id: 157
+    value: 100
+  - skill_id: 160
+    value: 100
+  - skill_id: 165
+    value: 100

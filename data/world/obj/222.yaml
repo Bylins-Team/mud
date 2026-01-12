@@ -1,0 +1,43 @@
+# Object #222
+vnum: 222
+
+names:
+  aliases: "руна земли"
+  nominative: "руна земли"
+  genitive: "руны земли"
+  dative: "руне земли"
+  accusative: "руну земли"
+  instrumental: "руной земли"
+  prepositional: "руне земли"
+
+descriptions:
+  room: "Магическая руна лежит тут на земле."
+  action: ""
+
+type: kSpellbook
+spec_param: 19
+durability:
+  maximum: 100
+  current: 90
+material: 12
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 222
+  value2: 1000
+  value3: 0
+
+weight: 1
+cost: 10
+rent:
+  off: 10
+  on: 10
+
+max_in_world: 100000

@@ -1,0 +1,43 @@
+# Object #305
+vnum: 305
+
+names:
+  aliases: "плеть"
+  nominative: "плеть"
+  genitive: "плети"
+  dative: "плети"
+  accusative: "плеть"
+  instrumental: "плетью"
+  prepositional: "плети"
+
+descriptions:
+  room: "Плеть валяется на земле."
+  action: ""
+
+type: kWeapon
+spec_param: 145
+durability:
+  maximum: -1
+  current: 0
+material: 16
+sex: kFemale
+timer: 30000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+  - kBoth
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 2
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0

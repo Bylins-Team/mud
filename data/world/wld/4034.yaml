@@ -1,0 +1,32 @@
+# Room #4034
+vnum: 4034
+zone: 40
+
+name: "Пахарская слобода"
+
+description: |
+     Эх, землица, кормилица ты наша. Всяк тебя топчет - не всяк поднять может.
+  Лишь душа селянская, прямая и открытая, лежит к тебе. Но тот, кто поймет
+  тебя - ужо того не обделишь ты своими дарами-гостинцами - и самому хватит,
+  да и людишкам достанется. Крытые соломой домишки теснятся друг к дружке вдоль
+  улицы.
+
+sector: kCity
+
+exits:
+  - direction: kNorth
+    exit_flags: 0
+    key: -1
+    to_room: 4035
+  - direction: kEast
+    exit_flags: 0
+    key: -1
+    to_room: 4033
+  - direction: kSouth
+    exit_flags: 0
+    key: 0
+    to_room: 5901
+  - direction: kWest
+    exit_flags: 0
+    key: -1
+    to_room: 4037

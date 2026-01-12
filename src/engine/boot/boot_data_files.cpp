@@ -1,4 +1,5 @@
 #include "boot_data_files.h"
+#include "yaml_data_files.h"
 
 #include "engine/db/obj_prototypes.h"
 #include "engine/scripting/dg_olc.h"
@@ -406,7 +407,7 @@ void WorldFile::parse_room(int virtual_nr) {
 			exit(1);
 		}
 	}
-	// Создаем новую комнату
+	// О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 	world.push_back(new RoomData);
 	world[room_realnum]->zone_rn = zone;
 	world[room_realnum]->vnum = virtual_nr;
@@ -485,7 +486,7 @@ void WorldFile::parse_room(int virtual_nr) {
 					switch (letter) {
 						case 'I':
 							get_line(file(),
-									 line); //оставлено для совместимости, удалить после пересохранения комнат
+									 line); //О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫, О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 							break;
 
 						case 'T': dg_read_trigger(world[room_realnum], WLD_TRIGGER, virtual_nr);
@@ -516,7 +517,7 @@ void WorldFile::setup_dir(int room, unsigned dir) {
 	world[room]->dir_option_proto[dir] = std::make_shared<ExitData>();
 	world[room]->dir_option_proto[dir]->general_description = fread_string();
 
-	// парс строки алиаса двери на имя; вининельный падеж, если он есть
+	// О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫; О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫, О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫
 	world[room]->dir_option_proto[dir]->set_keywords(fread_string());
 
 	if (!get_line(file(), line)) {
@@ -615,7 +616,7 @@ void ObjectFile::parse_object(const int nr) {
 	tobj->set_short_description(utils::colorLOW(fread_string()));
 
 	strcpy(buf, tobj->get_short_description().c_str());
-	tobj->set_PName(ECase::kNom, utils::colorLOW(buf)); //именительный падеж равен короткому описанию
+	tobj->set_PName(ECase::kNom, utils::colorLOW(buf)); //О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	for (j = ECase::kGen; j <= ECase::kLastCase; j++) {
 		tobj->set_PName(static_cast<ECase>(j), utils::colorLOW(fread_string()));
@@ -743,7 +744,7 @@ void ObjectFile::parse_object(const int nr) {
 			tobj->set_weight(tobj->get_val(1) + 5);
 		}
 	}
-	tobj->unset_extraflag(EObjFlag::kTransformed); //от шаловливых ручек
+	tobj->unset_extraflag(EObjFlag::kTransformed); //О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫
 	tobj->unset_extraflag(EObjFlag::kTicktimer);
 
 	// *** extra descriptions and affect fields ***
@@ -849,7 +850,7 @@ bool ObjectFile::check_object(ObjData *obj) {
 		log("SYSERR: Object #%d (%s) has negative weight (%d).",
 			GET_OBJ_VNUM(obj), obj->get_short_description().c_str(), obj->get_weight());
 	}
-/* спам от антуражных шмоток
+/* О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 	if (obj->get_rent_off() <= 0) {
 		error = true;
 		log("SYSERR: Object #%d (%s) has negative cost/day (%d).",
@@ -1049,14 +1050,14 @@ void MobileFile::parse_mobile(const int nr) {
 
 	// DG triggers -- script info follows mob S/E section
 	// DG triggers -- script is defined after the end of the room 'T'
-	// Ингредиентная магия -- 'I'
-	// Объекты загружаемые по-смертно -- 'L'
+	// О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ -- 'I'
+	// О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫-О©╫О©╫О©╫О©╫О©╫О©╫О©╫ -- 'L'
 
 	do {
 		letter = fread_letter(file());
 		ungetc(letter, file());
 		switch (letter) {
-			case 'I': // Оставлено для совместимости со старым форматиом (с ингредиентами в файлах зон).
+			case 'I': // О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ (О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫).
 				get_line(file(), line);
 				break;
 
@@ -1100,7 +1101,7 @@ void MobileFile::parse_simple_mob(int i, int nr) {
 	mob_proto[i].set_con(11);
 	mob_proto[i].set_cha(11);
 
-	mob_proto[i].player_specials->saved.NameGod = 1001; // у мобов имя всегда одобрено
+	mob_proto[i].player_specials->saved.NameGod = 1001; // О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 	if (!get_line(file(), line)) {
 		log("SYSERR: Format error in mob #%d, file ended after S flag!", nr);
 		exit(1);
@@ -1245,10 +1246,10 @@ void MobileFile::interpret_espec(const char *keyword, const char *value, int i, 
 		}
 
 
-/*		заготовка парса резистов у моба при загрузке мада, чтоб в след раз не придумывать
-		if (GET_RESIST(mob_proto + i, 4) > 49 && !mob_proto[i].get_role(kBoss)) // жизнь и не боссы
+/*		О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫, О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+		if (GET_RESIST(mob_proto + i, 4) > 49 && !mob_proto[i].get_role(kBoss)) // О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫
 		{
-			if (zone_table[world[&mob_proto[i]->in_room]->zone].group < 3) // в зонах 0-2 группы
+			if (zone_table[world[&mob_proto[i]->in_room]->zone].group < 3) // О©╫ О©╫О©╫О©╫О©╫О©╫ 0-2 О©╫О©╫О©╫О©╫О©╫О©╫
 				log("RESIST LIVE num: %d Vnum: %d Level: %d Name: %s", GET_RESIST(mob_proto + i, 4), mob_index[i].vnum, GetRealLevel(&mob_proto[i]), GET_PAD(&mob_proto[i], 0));
 		}
 */
@@ -1263,7 +1264,7 @@ void MobileFile::interpret_espec(const char *keyword, const char *value, int i, 
 			SetSave(mob_proto + i, save, std::clamp(t[to_underlying(save)], kMinSaving, kMaxSaving));
 		}
 	}
-// Svent: и что тут за коллекция магик намберов бесконечная? Вынести в настройки.
+// Svent: О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫? О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫.
 	CASE("HPReg") {
 		mob_proto[i].add_abils.hitreg = std::clamp(num_arg, -200, 200);
 	}
@@ -1499,7 +1500,7 @@ bool ZoneFile::load_zone() {
 		size_t digits = full_file_name().find_first_of("1234567890");
 		if (digits <= full_file_name().size()) {
 			if (zone.vnum != atoi(full_file_name().c_str() + digits)) {
-				log("SYSERR: файл %s содержит неверный номер зоны %d", full_file_name().c_str(), zone.vnum);
+				log("SYSERR: О©╫О©╫О©╫О©╫ %s О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ %d", full_file_name().c_str(), zone.vnum);
 				exit(1);
 			}
 		}
@@ -1549,7 +1550,7 @@ bool ZoneFile::load_regular_zone() {
 	if (zone.typeB_count) {
 		CREATE(zone.typeB_list, zone.typeB_count);
 		CREATE(zone.typeB_flag, zone.typeB_count);
-		// сбрасываем все флаги
+		// О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫
 		for (b_number = zone.typeB_count; b_number > 0; b_number--) {
 			zone.typeB_flag[b_number - 1] = false;
 		}
@@ -1571,7 +1572,7 @@ bool ZoneFile::load_regular_zone() {
 	}
 	zone.name = buf;
 
-	log("Читаем zon файл: %s", full_file_name().c_str());
+	log("О©╫О©╫О©╫О©╫О©╫О©╫ zon О©╫О©╫О©╫О©╫: %s", full_file_name().c_str());
 	while (*buf != 'S' && !feof(file())) {
 		line_num += get_line(file(), buf);
 
@@ -1611,10 +1612,10 @@ bool ZoneFile::load_regular_zone() {
 	auto group = 0;
 	const auto count = sscanf(buf, "#%d %d %d %d", &zone.level, &zone.type, &group, &zone.entrance);
 	if (count < 2) {
-		log("SYSERR: ошибка чтения z.level, z.type, z.group, z.entrance: %s", buf);
+		log("SYSERR: О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ z.level, z.type, z.group, z.entrance: %s", buf);
 		exit(1);
 	}
-	zone.group = (group == 0) ? 1 : group; //группы в 0 рыл не бывает
+	zone.group = (group == 0) ? 1 : group; //О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ 0 О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 	line_num += get_line(file(), buf);
 
 	char t1[80];
@@ -1623,7 +1624,7 @@ bool ZoneFile::load_regular_zone() {
 	*t2 = 0;
 	auto tmp_reset_idle = 0;
 	if (sscanf(buf, " %d %d %d %d %s %s", &zone.top, &zone.lifespan, &zone.reset_mode, &tmp_reset_idle, t1, t2) < 4) {
-		// если нет четырех констант, то, возможно, это старый формат -- попробуем прочитать три
+		// О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫, О©╫О©╫, О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫, О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ -- О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫
 		const auto count = sscanf(buf, " %d %d %d %s %s",
 								  &zone.top,
 								  &zone.lifespan,
@@ -1659,9 +1660,9 @@ bool ZoneFile::load_regular_zone() {
 		}
 		ptr++;
 
-		// Новые параметры формата файла:
-		// A номер_зоны -- зона типа A из списка
-		// B номер_зоны -- зона типа B из списка
+		// О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫:
+		// A О©╫О©╫О©╫О©╫О©╫_О©╫О©╫О©╫О©╫ -- О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ A О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+		// B О©╫О©╫О©╫О©╫О©╫_О©╫О©╫О©╫О©╫ -- О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ B О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 		if (zone.cmd[cmd_no].command == 'A') {
 			sscanf(ptr, " %d", &zone.typeA_list[a_number]);
 			a_number++;
@@ -1776,8 +1777,8 @@ bool HelpFile::load_help() {
 		strcpy(entry, strcat(key, "\r\n"));
 		get_one_line(line);
 		while (*line != '#') {
-			// если вдруг файл внезапно закончился и '#' так и не встретился
-			// логаем ошибку и заканчиваем парсинг во избежание зацикливания
+			// О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ '#' О©╫О©╫О©╫ О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+			// О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 			if ((*line == '$') && (*(line + 1) == 0)) {
 				std::stringstream str_log;
 				str_log << "SYSERR: unexpected EOF in help file: \"" << file_name() << "\"";
@@ -1835,7 +1836,7 @@ bool SocialsFile::load_socials() {
 		scan = one_word(line, next_key);
 		while (*next_key) {
 			key++;
-			// Не нужен лишний спам, только мешает искать ошибки
+			// О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫, О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 			//log("Social %d '%s' - message %d", key, next_key, message);
 			soc_keys_list[key].keyword = str_dup(next_key);
 			soc_keys_list[key].social_message = message;
@@ -1905,22 +1906,16 @@ DataFileFactory::shared_ptr DataFileFactory::create() {
 }
 
 BaseDataFile::shared_ptr DataFileFactoryImpl::get_file(const EBootType mode, const std::string &file_name) {
+	// пёп╫п╦я└п╦я├п╦я─п╬п╡п╟п╫п╫п╟я▐ я│п╦я│я┌п╣п╪п╟: п╦я│п©п╬п╩я▄п╥я┐п╣п╪ я┌п╬п╩я▄п╨п╬ YAML п╩п╬п╟п╢п╣я─я▀
 	switch (mode) {
-		case DB_BOOT_WLD:return WorldFile::create(file_name);
-
-		case DB_BOOT_MOB:return MobileFile::create(file_name);
-
-		case DB_BOOT_OBJ:return ObjectFile::create(file_name);
-
-		case DB_BOOT_ZON:return ZoneFile::create(file_name);
-
-		case DB_BOOT_HLP:return HelpFile::create(file_name);
-
-		case DB_BOOT_TRG:return TriggersFile::create(file_name, m_load_obj_exp);
-
-		case DB_BOOT_SOCIAL:return SocialsFile::create(file_name);
-
-		default:return nullptr;
+		case DB_BOOT_WLD: return YamlWorldFile::create(file_name);
+		case DB_BOOT_MOB: return YamlMobileFile::create(file_name);
+		case DB_BOOT_OBJ: return YamlObjectFile::create(file_name);
+		case DB_BOOT_ZON: return YamlZoneFile::create(file_name);
+		case DB_BOOT_HLP: return YamlHelpFile::create(file_name);
+		case DB_BOOT_TRG: return YamlTriggersFile::create(file_name);
+		case DB_BOOT_SOCIAL: return YamlSocialsFile::create(file_name);
+		default: return nullptr;
 	}
 }
 

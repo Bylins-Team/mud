@@ -1,0 +1,47 @@
+# Object #126
+vnum: 126
+
+names:
+  aliases: "светящийся шарик"
+  nominative: "светящийся шарик"
+  genitive: "светящегося шарика"
+  dative: "светящемуся шарику"
+  accusative: "светящийся шарик"
+  instrumental: "светящимся шариком"
+  prepositional: "светящемся шарике"
+
+descriptions:
+  room: "Если Вы это видите - у кодера какие-то проблемы."
+  action: "Вы зажгли шарик и взяли его в левую руку."
+
+type: kLightSource
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 0
+sex: kMale
+timer: 43200
+spell: -1
+level: 1
+
+extra_flags:
+  - kAntiGood
+  - kAntiEvil
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 0
+  value1: 0
+  value2: 24
+  value3: 0
+
+weight: 1
+cost: 2
+rent:
+  off: 2
+  on: 1
+
+max_in_world: 10000

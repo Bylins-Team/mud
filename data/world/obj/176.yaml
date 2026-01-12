@@ -1,0 +1,42 @@
+# Object #176
+vnum: 176
+
+names:
+  aliases: "железная дубина"
+  nominative: "железная дубина"
+  genitive: "железной дубины"
+  dative: "железной дубине"
+  accusative: "железную дубину"
+  instrumental: "железной дубиной"
+  prepositional: "железной дубине"
+
+descriptions:
+  room: "Толстый железный прут лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 141
+durability:
+  maximum: 100
+  current: 100
+material: 3
+sex: kFemale
+timer: 43200
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 2
+  value2: 5
+  value3: 5
+
+weight: 22
+cost: 150
+rent:
+  off: 150
+  on: 10

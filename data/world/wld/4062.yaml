@@ -1,0 +1,34 @@
+# Room #4062
+vnum: 4062
+zone: 40
+
+name: "Церковь"
+
+description: |
+     Вы зашли в просторную комнату с рядом широких скамеек. На стенах вы видите
+  иконы, всюду горят свечи. За алтарем на стене находится распятие. Вы 
+  чувствуете умиротворение в своей душе.
+
+room_flags:
+  - kIndoors
+  - kPeaceFul
+  - kNoMagic
+  - kMoOnlyRoom
+  - kNoSummon
+  - kNoTeleportOut
+  - kNoBattle
+  - kSlowDeathTrap
+  - kArena
+  - kNoWeather
+  - kDeathIceTrap
+  - kIceTrap
+  - kExchangeRoom
+  - kNoArmor
+  - kDecayedDeathTrap
+sector: kCity
+
+exits:
+  - direction: kSouth
+    exit_flags: 0
+    key: -1
+    to_room: 4017

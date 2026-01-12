@@ -1,0 +1,46 @@
+# Object #117
+vnum: 117
+
+names:
+  aliases: "кожаная шапка"
+  nominative: "кожаная шапка"
+  genitive: "кожаной шапки"
+  dative: "кожаной шапке"
+  accusative: "кожаную шапку"
+  instrumental: "кожаной шапкой"
+  prepositional: "кожаной шапке"
+
+descriptions:
+  room: "Кожаная шапка лежит тут."
+  action: ""
+
+type: kOther
+spec_param: 0
+durability:
+  maximum: 75
+  current: 75
+material: 15
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+extra_flags:
+  - kAntiGood
+wear_flags:
+  - kTake
+  - kHead
+
+values:
+  value0: 0
+  value1: 1
+  value2: 0
+  value3: 0
+
+weight: 2
+cost: 10
+rent:
+  off: 10
+  on: 1
+
+max_in_world: 10000

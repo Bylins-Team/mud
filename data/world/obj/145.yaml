@@ -1,0 +1,44 @@
+# Object #145
+vnum: 145
+
+names:
+  aliases: "медовый напиток"
+  nominative: "медовый напиток"
+  genitive: "медового напитка"
+  dative: "медовому напитку"
+  accusative: "медовый напиток"
+  instrumental: "медовым напитком"
+  prepositional: "медовом напитке"
+
+descriptions:
+  room: "Глиняная корчага с источающим запах меда напитком стоит тут."
+  action: ""
+
+type: kTrash
+spec_param: 0
+durability:
+  maximum: 10
+  current: 10
+material: 10
+sex: kMale
+timer: 20160
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 25
+  value1: 103
+  value2: 0
+  value3: 0
+
+weight: 1
+cost: 30
+rent:
+  off: 5
+  on: 5
+
+max_in_world: 100000

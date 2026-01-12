@@ -1,0 +1,42 @@
+# Object #302
+vnum: 302
+
+names:
+  aliases: "сабля"
+  nominative: "сабля"
+  genitive: "сабли"
+  dative: "сабле"
+  accusative: "саблю"
+  instrumental: "саблей"
+  prepositional: "сабле"
+
+descriptions:
+  room: "Сабля лежит здесь."
+  action: ""
+
+type: kWeapon
+spec_param: 144
+durability:
+  maximum: -1
+  current: 0
+material: 0
+sex: kFemale
+timer: 30000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+  - kHold
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 7
+
+weight: 0
+cost: 1
+rent:
+  off: 80
+  on: 60

@@ -1,0 +1,41 @@
+# Object #291
+vnum: 291
+
+names:
+  aliases: "новый предмет"
+  nominative: "это что"
+  genitive: "нету чего"
+  dative: "привязать к чему"
+  accusative: "взять что"
+  instrumental: "вооружиться чем"
+  prepositional: "говорить о чем"
+
+descriptions:
+  room: "Что-то новое лежит здесь"
+  action: ""
+
+type: kUndefined
+spec_param: 0
+durability:
+  maximum: 0
+  current: 0
+material: 0
+sex: kNeutral
+timer: 43200
+spell: 0
+level: 0
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0

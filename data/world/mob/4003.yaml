@@ -1,0 +1,70 @@
+# Mob #4003
+vnum: 4003
+
+names:
+  aliases: "кузнец"
+  nominative: "кузнец"
+  genitive: "кузнеца"
+  dative: "кузнецу"
+  accusative: "кузнеца"
+  instrumental: "кузнецом"
+  prepositional: "кузнеце"
+
+descriptions:
+  short: "Крепкий мужчина стоит возле горна."
+  long: |
+    Крепкий мужчина в кожаном халате.
+    От постоянной тяжелой работы тело
+    его окрепло и огрубело.
+
+action_flags:
+  - kSentinel
+  - kIsNpc
+  - kNoSleep
+  - kNoBash
+  - kNoBlind
+  - kSentinel
+alignment: 600
+mob_type: E
+
+stats:
+  level: 20
+  hitroll_penalty: 8
+  armor: 0
+  hp:
+    dice_count: 10
+    dice_size: 10
+    bonus: 400
+  damage:
+    dice_count: 3
+    dice_size: 3
+    bonus: 10
+
+gold:
+  dice_count: 10
+  dice_size: 10
+  bonus: 100
+experience: 0
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kMale
+
+attributes:
+  strength: 25
+  dexterity: 20
+  intelligence: 20
+  wisdom: 20
+  constitution: 25
+  charisma: 20
+
+size: 30
+mob_class: 100
+race: 101
+height: 180
+weight: 150
+
+skills:
+  - skill_id: 136
+    value: 60

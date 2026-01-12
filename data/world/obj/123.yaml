@@ -1,0 +1,42 @@
+# Object #123
+vnum: 123
+
+names:
+  aliases: "кольчуга"
+  nominative: "кольчуга"
+  genitive: "кольчуги"
+  dative: "кольчуге"
+  accusative: "кольчугу"
+  instrumental: "кольчугой"
+  prepositional: "кольчуге"
+
+descriptions:
+  room: "Добротная кольчуга лежит тут."
+  action: ""
+
+type: kOther
+spec_param: 0
+durability:
+  maximum: 100
+  current: 100
+material: 3
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+  - kBody
+
+values:
+  value0: 1
+  value1: 2
+  value2: 0
+  value3: 0
+
+weight: 4
+cost: 90
+rent:
+  off: 90
+  on: 6

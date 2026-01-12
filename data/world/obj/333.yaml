@@ -1,0 +1,43 @@
+# Object #333
+vnum: 333
+
+names:
+  aliases: "короб хранения ингредиентов"
+  nominative: "короб для хранения ингредиентов"
+  genitive: "короба для хранения ингредиентов"
+  dative: "коробу для хранения ингредиентов"
+  accusative: "короб для хранения ингредиентов"
+  instrumental: "коробом для хранения ингредиентов"
+  prepositional: "коробе для хранения ингредиентов"
+
+descriptions:
+  room: "Короб для хранения ингредиентов пристроен в углу."
+  action: ""
+
+type: kFood
+spec_param: 0
+durability:
+  maximum: 0
+  current: 0
+material: 0
+sex: kNeutral
+timer: 10080
+spell: 0
+level: 0
+
+extra_flags:
+  - kNoInvis
+  - kAntiMage
+  - kTransformed
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0

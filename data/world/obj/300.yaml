@@ -1,0 +1,41 @@
+# Object #300
+vnum: 300
+
+names:
+  aliases: "шелепуга"
+  nominative: "шелепуга"
+  genitive: "шелепуги"
+  dative: "шелепуге"
+  accusative: "шелепугу"
+  instrumental: "шелепугой"
+  prepositional: "шелепуге"
+
+descriptions:
+  room: "Шелепуга лежит здесь."
+  action: ""
+
+type: kWeapon
+spec_param: 141
+durability:
+  maximum: -1
+  current: 0
+material: 0
+sex: kFemale
+timer: 30000
+spell: -1
+level: 0
+
+wear_flags:
+  - kTake
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 6
+
+weight: 0
+cost: 150
+rent:
+  off: 100
+  on: 75

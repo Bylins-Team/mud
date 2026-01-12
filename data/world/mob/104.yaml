@@ -1,0 +1,51 @@
+# Mob #104
+vnum: 104
+
+names:
+  aliases: "хранитель неизвестный"
+  nominative: "хранитель"
+  genitive: "хранителя"
+  dative: "хранителю"
+  accusative: "хранителя"
+  instrumental: "хранителем"
+  prepositional: "хранителе"
+
+descriptions:
+  short: "Дух неизвестного существа летает тут."
+  long: "Созданное силой магии существо повинуется любой воле своего хозяина."
+
+action_flags:
+  - kIsNpc
+  - kFlying
+alignment: 0
+mob_type: E
+
+
+gold:
+  dice_count: 0
+  dice_size: 0
+  bonus: 0
+experience: 0
+
+position:
+  default: kStanding
+  start: kStanding
+sex: kMale
+
+attributes:
+  strength: 3
+  dexterity: 19
+  intelligence: 12
+  wisdom: 12
+  constitution: 10
+  charisma: 14
+
+size: 30
+mob_class: 101
+race: 110
+height: 50
+weight: 50
+
+skills:
+  - skill_id: 136
+    value: 85

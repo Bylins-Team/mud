@@ -1,0 +1,44 @@
+# Object #186
+vnum: 186
+
+names:
+  aliases: "доспех покрыт драконья кровь"
+  nominative: "доспех, покрытый драконьей кровью"
+  genitive: "доспеха, покрытого драконьей кровью"
+  dative: "доспеху, покрытому драконьей кровью"
+  accusative: "доспех, покрытый драконьей кровью"
+  instrumental: "доспехом, покрытым драконьей кровью"
+  prepositional: "доспехе, покрытом драконьей кровью"
+
+descriptions:
+  room: "Тяжелый массивный доспех лежит здесь, и алая кровь дракона видна на нем."
+  action: ""
+
+type: kOther
+spec_param: 0
+durability:
+  maximum: 500
+  current: 500
+material: 5
+sex: kNeutral
+timer: 2000
+spell: -1
+level: 0
+
+extra_flags:
+  - kGlow
+wear_flags:
+  - kTake
+  - kBody
+
+values:
+  value0: 40
+  value1: 40
+  value2: 0
+  value3: 0
+
+weight: 10
+cost: 10
+rent:
+  off: 10
+  on: 10

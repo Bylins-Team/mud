@@ -1,0 +1,42 @@
+# Object #106
+vnum: 106
+
+names:
+  aliases: "деревянный палица"
+  nominative: "деревянная палица"
+  genitive: "деревянной палицы"
+  dative: "деревянной палице"
+  accusative: "деревянную палицу"
+  instrumental: "деревянной палицей"
+  prepositional: "деревянной палице"
+
+descriptions:
+  room: "Сделанная из дерева палица лежит тут."
+  action: ""
+
+type: kWeapon
+spec_param: 141
+durability:
+  maximum: 100
+  current: 100
+material: 9
+sex: kFemale
+timer: 43200
+spell: -1
+level: 1
+
+wear_flags:
+  - kTake
+  - kWield
+
+values:
+  value0: 0
+  value1: 2
+  value2: 4
+  value3: 0
+
+weight: 10
+cost: 20
+rent:
+  off: 20
+  on: 10

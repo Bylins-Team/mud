@@ -1,0 +1,46 @@
+# Object #332
+vnum: 332
+
+names:
+  aliases: "короб склад снаряжения ватаги"
+  nominative: "склад снаряжения вашей ватаги"
+  genitive: "склад снаряжения вашей ватагий"
+  dative: "склад снаряжения вашей ватаги"
+  accusative: "склад снаряжения вашей ватаги"
+  instrumental: "склад снаряжения вашей ватаги"
+  prepositional: "склад снаряжения вашей ватаги"
+
+descriptions:
+  room: "Короб для хранения снаряжения вашей ватаги пристроен в углу."
+  action: ""
+
+type: kFood
+spec_param: 0
+durability:
+  maximum: 0
+  current: 0
+material: 0
+sex: kNeutral
+timer: 10000
+spell: 0
+level: 0
+
+extra_flags:
+  - kNoRent
+  - kNoDonate
+  - kNoInvis
+  - kAntiGood
+  - kAntiMage
+  - kTransformed
+
+values:
+  value0: 0
+  value1: 0
+  value2: 0
+  value3: 0
+
+weight: 0
+cost: 0
+rent:
+  off: 0
+  on: 0
