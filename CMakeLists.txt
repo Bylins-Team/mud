@@ -918,53 +918,6 @@ if (TIMED_SCRIPT)
 endif ()
 add_definitions(${TIMED_SCRIPT_DEFINITION})
 
-# Turns on/off scripting. Use the option like:
-#     $ cmake -DSCRIPTING=ON..
-# to turn scripting ON.
-option(SCRIPTING "Turns on/off scripting engine" NO)
-if (SCRIPTING)
-	message(STATUS "Turning scripting ON")
-	list(APPEND HEADERS ${SCRIPTING_HEADERS})
-	list(APPEND SOURCES ${SCRIPTING_SOURCES})
-	source_group("Scripting\\Headers" FILES ${SCRIPTING_HEADERS})
-	source_group("Scripting\\Sources" FILES ${SCRIPTING_SOURCES})
-	add_definitions(-DWITH_SCRIPTING)
-
-	find_package(PythonLibs)
-	if (NOT PYTHONLIBS_FOUND)
-		message(FATAL_ERROR "Python not found.")
-	endif ()
-
-	if (PYTHONLIBS_VERSION_STRING STRLESS "3.0.0")
-		message(FATAL_ERROR "Python of version 3 or later has not been found (found ${PYTHONLIBS_VERSION_STRING})")
-	endif ()
-	message(STATUS "Python libs version string is '${PYTHONLIBS_VERSION_STRING}'")
-
-	if (NOT CYGWIN)
-		if (UNIX)
-			set(DEFAULT_EXPLICIT_BP_VERSION YES)
-		else ()
-			set(DEFAULT_EXPLICIT_BP_VERSION NO)
-		endif ()
-		# Should we specify version of Boost python explicitly or not. Yes by default on Unix platforms.
-		option(EXPLICIT_BP_VERSION "Try to find boost python library with explicit version suffix" ${DEFAULT_EXPLICIT_BP_VERSION})
-		if (EXPLICIT_BP_VERSION AND PYTHONLIBS_VERSION_STRING)
-			string(REGEX REPLACE "^([0-9])\\.([0-9]).*$" "-py\\1\\2" BOOSTPYTHON_LIBS_SUFFIX ${PYTHONLIBS_VERSION_STRING})
-			message(STATUS "Using explicit boostpython library suffix '${BOOSTPYTHON_LIBS_SUFFIX}'")
-		else ()
-			set(BOOSTPYTHON_LIBS_SUFFIX "")
-		endif ()
-	else ()
-		set(BOOSTPYTHON_LIBS_SUFFIX "3")
-	endif ()
-
-	set(BOOST_PYTHON_MODULE python${BOOSTPYTHON_LIBS_SUFFIX})
-else()
-	message(STATUS "Turning scripting OFF")
-	set(BOOST_PYTHON_MODULE)
-	set(PYTHON_LIBRARIES)
-endif ()
-
 # MSDP
 set(MSDP_FILES
 		src/engine/network/msdp/msdp.h
@@ -1046,6 +999,35 @@ set(MISC_FILES
 
 source_group("Misc" FILES ${MISC_FILES})
 
+# Perfetto support
+option(WITH_PERFETTO "Enable Perfetto tracing and profiling" OFF)
+
+if (WITH_PERFETTO)
+	message(STATUS "Perfetto instrumentation is ON")
+
+	# Ensure CMake version is sufficient for Perfetto
+	if (CMAKE_VERSION VERSION_LESS "3.15")
+		message(FATAL_ERROR "Perfetto requires CMake 3.15 or higher. Current version: ${CMAKE_VERSION}")
+	endif()
+
+	# Set policies for compatibility with newer CMake versions
+	if(POLICY CMP0077)
+		cmake_policy(SET CMP0077 NEW)
+	endif()
+
+	# Add Perfetto source files
+	list(APPEND SOURCES
+			src/engine/observability/perfetto_wrapper.cpp)
+	list(APPEND HEADERS
+			src/engine/observability/perfetto_wrapper.h)
+
+	# Define WITH_PERFETTO macro
+	add_definitions(-DWITH_PERFETTO)
+else()
+	message(STATUS "Perfetto instrumentation is OFF")
+endif ()
+
+
 set(CIRCLE_FILES ${SOURCES} ${HEADERS} readme.markdown CONTRIBUTING.md ${CRAFT_FILES} ${MISC_FILES} )
 
 # Sort source and header files. Just to convenience.
@@ -1058,9 +1040,10 @@ add_custom_target(changelog ALL
 set_target_properties(changelog PROPERTIES FOLDER "Utility targets")
 
 # Main library file.
+set(CMAKE_CXX_STANDARD 20)
 add_library(circle.library STATIC ${CIRCLE_FILES})
 if (UNIX AND NOT CYGWIN)
-	add_definitions("-std=c++20")
+	# nothing, already set to the standard 20
 elseif (CYGWIN)
 	add_definitions("-std=gnu++2a")
 else ()
@@ -1074,61 +1057,9 @@ set(FORT_ENABLE_TESTING OFF CACHE INTERNAL "")
 add_subdirectory(src/third_party_libs/libfort)
 target_link_libraries(circle.library fort)
 
-#fmt inegration
+#fmt integration
 add_subdirectory(src/third_party_libs/fmt EXCLUDE_FROM_ALL)
 target_link_libraries(circle.library fmt::fmt)
-
-# Boost
-option(BOOST "Turns on/off scripting engine" NO)
-if (BOOST)
-	message(STATUS "Turning BOOST ON")
-	set(BOOST_MODULES ${BOOST_PYTHON_MODULE} system filesystem)
-	if (WIN32)
-		list(APPEND BOOST_MODULES locale)
-	elseif (UNIX)
-		if (NOT DEFINED ENV{BOOST_ROOT} AND NOT DEFINED ENV{BOOST_INCLUDEDIR})
-			set(BOOST_INCLUDEDIR "/usr/include")
-			message(STATUS "Trying to use BOOST_INCLUDEDIR with value \"${BOOST_INCLUDEDIR}\"")
-		endif()
-		if (NOT DEFINED ENV{BOOST_ROOT} AND NOT DEFINED ENV{BOOST_LIBRARYDIR})
-			set(BOOST_LIBRARYDIR "/usr/lib/x86_64-linux-gnu")
-			message(STATUS "Trying to use BOOST_LIBRARYDIR with value \"${BOOST_LIBRARYDIR}\"")
-		endif()
-	endif ()
-	if (BOOST_NO_SYSTEM_PATHS)
-		set(Boost_NO_SYSTEM_PATHS ON)
-	endif ()
-	if (NOT CYGWIN)
-		add_definitions("-DBOOST_PYTHON_STATIC_LIB")
-		set(Boost_USE_STATIC_LIBS ON)
-	endif ()
-	if (DEFINED ENV{DEBUG_BOOST_FIND})
-		set(Boost_DEBUG ON)
-	endif ()
-	# In case of you have more than one Visual Studio and want to use specific version, uncomment the following three lines and specify compiler you want
-	if (CMAKE_HOST_WIN32)
-		set(BOOST_REQUIRED_COMPILER "" CACHE STRING "Compiler which must be used to compile Boost libraries (for example: -vc141 for Visual Studio 15 (2017))")
-		if (BOOST_REQUIRED_COMPILER)
-			set(Boost_COMPILER "${BOOST_REQUIRED_COMPILER}")
-		else ()
-			set(Boost_COMPILER "-vc141")
-		endif ()
-		target_compile_options(circle.library PUBLIC /MP /MDd)
-		target_compile_options(circle.library PUBLIC $<$<CONFIG:Debug>:/Zi /Od>)
-		target_compile_options(circle.library PUBLIC $<$<CONFIG:Release>:/O2>)
-		target_compile_options(circle.library PUBLIC $<$<CONFIG:Test>:/Zi /Od>)
-		target_compile_options(circle.library PUBLIC $<$<CONFIG:FastTest>:/O2>)
-	endif ()
-
-	set(BOOST_REQUIRED_VERSION OFF CACHE STRING "Optional version for Boost (for example, 1.54)")
-	set(BOOST_REQUIRED_VERSION_VALUE "")
-	if (BOOST_REQUIRED_VERSION)
-		set(BOOST_REQUIRED_VERSION_VALUE "${BOOST_REQUIRED_VERSION}")
-	endif ()
-	find_package(Boost ${BOOST_REQUIRED_VERSION_VALUE} REQUIRED COMPONENTS ${BOOST_MODULES})
-else()
-	message(STATUS "Turning BOOST OFF")
-endif ()
 
 # ZLib
 if (CMAKE_HOST_WIN32)
@@ -1159,6 +1090,35 @@ if (HAVE_SQLITE)
 	message(STATUS "SQLite is turned ON. Circle will support SQLite world data source.")
 else ()
 	message(STATUS "SQLite is turned off.")
+endif ()
+
+if (WITH_PERFETTO)
+	# Use FetchContent to download Perfetto SDK (amalgamated build)
+	include(FetchContent)
+
+	message(STATUS "Fetching Perfetto SDK (amalgamated build)...")
+
+	# Download amalgamated Perfetto SDK files
+	FetchContent_Declare(
+		perfetto
+		URL https://github.com/google/perfetto/archive/refs/tags/v53.0.tar.gz
+		DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+	)
+
+	FetchContent_MakeAvailable(perfetto)
+	
+	# Add perfetto include directory
+	include_directories(${perfetto_SOURCE_DIR}/sdk)
+	
+	# Add perfetto.cc to library sources
+	target_sources(circle.library PRIVATE ${perfetto_SOURCE_DIR}/sdk/perfetto.cc)
+	
+	# Disable warnings for perfetto.cc (external code)
+	set_source_files_properties(${perfetto_SOURCE_DIR}/sdk/perfetto.cc
+		PROPERTIES
+		COMPILE_FLAGS "-w")
+
+	message(STATUS "Perfetto SDK configured successfully")
 endif ()
 
 # Iconv
@@ -1202,9 +1162,7 @@ if (HAVE_TG)
 	endif()
 	if (HAVE_TG)
 		add_definitions("-DHAVE_TG")
-#		set(Boost_USE_MULTITHREADED ON)
-#		${CMAKE_THREAD_LIBS_INIT}
-		target_link_libraries(circle.library ${OPENSSL_LIBRARIES} ${Boost_LIBRARIES} ${CURL_LIBRARIES})
+		target_link_libraries(circle.library ${OPENSSL_LIBRARIES} ${CURL_LIBRARIES})
 		message(STATUS "SSL IS ON, Telegram support enabled")
 	else ()
 		message(STATUS "Telegram support disabled, no dependant libs found")
@@ -1212,10 +1170,8 @@ if (HAVE_TG)
 endif ()
 
 include_directories(src
-	system ${Boost_INCLUDE_DIRS}
 	system ${PYTHON_INCLUDE_DIRS})
 target_link_libraries(circle.library
-	${Boost_LIBRARIES}
 	${PYTHON_LIBRARIES})
 
 # Prepare options for test build
@@ -1224,7 +1180,7 @@ set(TESTBUILD_DEFINITIONS "-DNOCRYPT -DTEST_BUILD")
 set(ASAN_FLAGS)
 if (UNIX AND NOT CYGWIN)
 	set(DEFAULT_WITH_ASAN YES)
-elseif ()
+else ()
 	set(DEFAULT_WITH_ASAN NO)
 endif ()
 option(WITH_ASAN "Compile with ASAN" ${DEFAULT_WITH_ASAN})

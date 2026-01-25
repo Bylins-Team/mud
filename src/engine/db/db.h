@@ -98,12 +98,12 @@ struct reset_com {
 	char *sarg2;        // string argument
 };
 
-// для экстраффектов в random_obj
+// О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫ random_obj
 struct ExtraAffects {
-	int number; // номер экстрааафетка
-	int min_val; // минимальное значение
-	int max_val; // максимальное значение
-	int chance; // вероятность того, что данный экстраффект будет на шмотке
+	int number; // О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+	int min_val; // О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+	int max_val; // О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+	int chance; // О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫, О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
 };
 
 // for queueing zones for update
@@ -136,7 +136,7 @@ struct IndexData {
   char *farg;        // string argument for special function     //
   Trigger *proto;    // for triggers... the trigger     //
   int zone;            // mob/obj zone rnum //
-  size_t set_idx; // индекс сета в obj_sets::set_list, если != -1
+  size_t set_idx; // О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫ obj_sets::set_list, О©╫О©╫О©╫О©╫ != -1
 };
 
 // =====================================================================================================================
@@ -160,11 +160,11 @@ extern const int Reverse[];
 
 
 template<typename T>
-class UniqueList: private std::list<T> {
-private:
+class UniqueList: std::list<T> {
 	using base_t = std::list<T>;
+
 public:
-	using iterator = base_t::iterator;
+	using iterator = typename base_t::iterator;
 	void push_back(const T& value) {
 		if (std::find(base_t::begin(), base_t::end(), value) == base_t::end()) {
 			base_t::push_back(value);

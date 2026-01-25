@@ -44,12 +44,12 @@ EOutputStream ITEM_BY_NAME<EOutputStream>(const std::string &name);
 template<>
 const std::string &NAME_BY_ITEM<EOutputStream>(const EOutputStream spell);
 
-/* PCCleanCriteria структура которая определяет через какой время
-   неактивности будет удален чар
+/* PCCleanCriteria я│я┌я─я┐п╨я┌я┐я─п╟ п╨п╬я┌п╬я─п╟я▐ п╬п©я─п╣п╢п╣п╩я▐п╣я┌ я┤п╣я─п╣п╥ п╨п╟п╨п╬п╧ п╡я─п╣п╪я▐
+   п╫п╣п╟п╨я┌п╦п╡п╫п╬я│я┌п╦ п╠я┐п╢п╣я┌ я┐п╢п╟п╩п╣п╫ я┤п╟я─
 */
 struct PCCleanCriteria {
-	int level = 0;	// max уровень для этого временного лимита //
-	int days = 0;	// временной лимит в днях        //
+	int level = 0;	// max я┐я─п╬п╡п╣п╫я▄ п╢п╩я▐ я█я┌п╬пЁп╬ п╡я─п╣п╪п╣п╫п╫п╬пЁп╬ п╩п╦п╪п╦я┌п╟ //
+	int days = 0;	// п╡я─п╣п╪п╣п╫п╫п╬п╧ п╩п╦п╪п╦я┌ п╡ п╢п╫я▐я┘        //
 };
 
 extern struct PCCleanCriteria pclean_criteria[];
@@ -147,6 +147,23 @@ class RuntimeConfiguration {
 		unsigned short m_port;
 	};
 
+	class PerfettoConfiguration {
+	 public:
+		PerfettoConfiguration()
+			: m_enabled(false)
+			, m_trace_file("/tmp/trace.perfetto-trace") {}
+
+		bool enabled() const { return m_enabled; }
+		const std::string &trace_file() const { return m_trace_file; }
+
+		void set_enabled(bool val) { m_enabled = val; }
+		void set_trace_file(const std::string &val) { m_trace_file = val; }
+
+	 private:
+		bool m_enabled;
+		std::string m_trace_file;
+	};
+
 	static constexpr std::size_t OUTPUT_QUEUE_SIZE = 256;
 
 	RuntimeConfiguration();
@@ -176,6 +193,8 @@ class RuntimeConfiguration {
 
 	const auto &statistics() const { return m_statistics; }
 
+	const PerfettoConfiguration &perfetto() const { return m_perfetto; }
+
  private:
 	static const char *CONFIGURATION_FILE_NAME;
 
@@ -193,6 +212,7 @@ class RuntimeConfiguration {
 	void load_boards_configuration(const pugi::xml_node *root);
 	void load_external_triggers(const pugi::xml_node *root);
 	void load_statistics_configuration(const pugi::xml_node *root);
+	void load_perfetto_configuration(const pugi::xml_node *root);
 
 	logs_t m_logs;
 	std::string m_log_stderr;
@@ -207,6 +227,7 @@ class RuntimeConfiguration {
 	std::string m_external_reboot_trigger_file_name;
 
 	StatisticsConfiguration m_statistics;
+	PerfettoConfiguration m_perfetto;
 };
 
 extern RuntimeConfiguration runtime_config;

@@ -77,10 +77,10 @@ int dts_are_dumps = YES;
  */
 int load_into_inventory = YES;
 
-const char *OK = "Ладушки.\r\n";
-const char *NOPERSON = "Нет такого создания в этом мире.\r\n";
-const char *NOEFFECT = "Ваши потуги оказались напрасными.\r\n";
-const char *nothing_string = "ничего";
+const char *OK = "п⌡п╟п╢я┐я┬п╨п╦.\r\n";
+const char *NOPERSON = "п²п╣я┌ я┌п╟п╨п╬пЁп╬ я│п╬п╥п╢п╟п╫п╦я▐ п╡ я█я┌п╬п╪ п╪п╦я─п╣.\r\n";
+const char *NOEFFECT = "п▓п╟я┬п╦ п©п╬я┌я┐пЁп╦ п╬п╨п╟п╥п╟п╩п╦я│я▄ п╫п╟п©я─п╟я│п╫я▀п╪п╦.\r\n";
+const char *nothing_string = "п╫п╦я┤п╣пЁп╬";
 
 /*
  * You can define or not define TRACK_THOUGH_DOORS, depending on whether
@@ -118,19 +118,19 @@ int rent_file_timeout = 60;
 // The period of free rent after crash or forced-rent in hours
 int free_crashrent_period = 2;
 
-/* Система автоудаления
-   В этой структуре хранится информация которая определяет какаие игроки
-   автоудалятся при перезагрузке мада. Уровни должны следовать в
-   возрастающем порядке с невозможно малым уровнем в конце массива.
-   Уровень -1 определяет удаленных угроков - т.е. через сколько времени
-   они физически попуржатся.
-   Если количество дней равно -1, то не удалять никогда
+/* п║п╦я│я┌п╣п╪п╟ п╟п╡я┌п╬я┐п╢п╟п╩п╣п╫п╦я▐
+   п▓ я█я┌п╬п╧ я│я┌я─я┐п╨я┌я┐я─п╣ я┘я─п╟п╫п╦я┌я│я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐ п╨п╬я┌п╬я─п╟я▐ п╬п©я─п╣п╢п╣п╩я▐п╣я┌ п╨п╟п╨п╟п╦п╣ п╦пЁя─п╬п╨п╦
+   п╟п╡я┌п╬я┐п╢п╟п╩я▐я┌я│я▐ п©я─п╦ п©п╣я─п╣п╥п╟пЁя─я┐п╥п╨п╣ п╪п╟п╢п╟. пёя─п╬п╡п╫п╦ п╢п╬п╩п╤п╫я▀ я│п╩п╣п╢п╬п╡п╟я┌я▄ п╡
+   п╡п╬п╥я─п╟я│я┌п╟я▌я┴п╣п╪ п©п╬я─я▐п╢п╨п╣ я│ п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╪п╟п╩я▀п╪ я┐я─п╬п╡п╫п╣п╪ п╡ п╨п╬п╫я├п╣ п╪п╟я│я│п╦п╡п╟.
+   пёя─п╬п╡п╣п╫я▄ -1 п╬п©я─п╣п╢п╣п╩я▐п╣я┌ я┐п╢п╟п╩п╣п╫п╫я▀я┘ я┐пЁя─п╬п╨п╬п╡ - я┌.п╣. я┤п╣я─п╣п╥ я│п╨п╬п╩я▄п╨п╬ п╡я─п╣п╪п╣п╫п╦
+   п╬п╫п╦ я└п╦п╥п╦я┤п╣я│п╨п╦ п©п╬п©я┐я─п╤п╟я┌я│я▐.
+   п∙я│п╩п╦ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╢п╫п╣п╧ я─п╟п╡п╫п╬ -1, я┌п╬ п╫п╣ я┐п╢п╟п╩я▐я┌я▄ п╫п╦п╨п╬пЁп╢п╟
 */
 struct PCCleanCriteria pclean_criteria[] =
 	{
-		//     УРОВЕНЬ           ДНИ
-		{-1, 0},        // Удаленные чары - удалять сразу
-		{0, 0},            // Чары 0го уровня никогда не войдут в игру, так что глюки удалять сразу
+		//     пёп═п·п▓п∙п²п╛           п■п²п≤
+		{-1, 0},        // пёп╢п╟п╩п╣п╫п╫я▀п╣ я┤п╟я─я▀ - я┐п╢п╟п╩я▐я┌я▄ я│я─п╟п╥я┐
+		{0, 0},            // п╖п╟я─я▀ 0пЁп╬ я┐я─п╬п╡п╫я▐ п╫п╦п╨п╬пЁп╢п╟ п╫п╣ п╡п╬п╧п╢я┐я┌ п╡ п╦пЁя─я┐, я┌п╟п╨ я┤я┌п╬ пЁп╩я▌п╨п╦ я┐п╢п╟п╩я▐я┌я▄ я│я─п╟п╥я┐
 		{1, 7},
 		{2, 14},
 		{3, 21},
@@ -156,8 +156,8 @@ struct PCCleanCriteria pclean_criteria[] =
 		{23, 161},
 		{24, 168},
 		{25, 360},
-		{kLvlImplementator, -1},        // c 25го и дальше живут вечно
-		{-2, 0}            // Последняя обязательная строка
+		{kLvlImplementator, -1},        // c 25пЁп╬ п╦ п╢п╟п╩я▄я┬п╣ п╤п╦п╡я┐я┌ п╡п╣я┤п╫п╬
+		{-2, 0}            // п÷п╬я│п╩п╣п╢п╫я▐я▐ п╬п╠я▐п╥п╟я┌п╣п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟
 	};
 
 
@@ -255,34 +255,34 @@ int siteok_everyone = true;
 int nameserver_is_slow = YES;
 
 const char *MENU = "\r\n"
-				   "0) Отсоединиться.\r\n"
-				   "1) Начать игру.\r\n"
-				   "2) Ввести описание вашего персонажа.\r\n"
-				   "3) Узнать историю.\r\n"
-				   "4) Изменить пароль.\r\n"
-				   "5) Удалить персонажа.\r\n"
-				   "6) Изменить параметры персонажа.\r\n"
-				   "7) Включить/выключить режим слепого игрока.\r\n"
-				   "8) Посмотреть всех персонажей на данном email'e.\r\n"
+				   "0) п·я┌я│п╬п╣п╢п╦п╫п╦я┌я▄я│я▐.\r\n"
+				   "1) п²п╟я┤п╟я┌я▄ п╦пЁя─я┐.\r\n"
+				   "2) п▓п╡п╣я│я┌п╦ п╬п©п╦я│п╟п╫п╦п╣ п╡п╟я┬п╣пЁп╬ п©п╣я─я│п╬п╫п╟п╤п╟.\r\n"
+				   "3) пёп╥п╫п╟я┌я▄ п╦я│я┌п╬я─п╦я▌.\r\n"
+				   "4) п≤п╥п╪п╣п╫п╦я┌я▄ п©п╟я─п╬п╩я▄.\r\n"
+				   "5) пёп╢п╟п╩п╦я┌я▄ п©п╣я─я│п╬п╫п╟п╤п╟.\r\n"
+				   "6) п≤п╥п╪п╣п╫п╦я┌я▄ п©п╟я─п╟п╪п╣я┌я─я▀ п©п╣я─я│п╬п╫п╟п╤п╟.\r\n"
+				   "7) п▓п╨п╩я▌я┤п╦я┌я▄/п╡я▀п╨п╩я▌я┤п╦я┌я▄ я─п╣п╤п╦п╪ я│п╩п╣п©п╬пЁп╬ п╦пЁя─п╬п╨п╟.\r\n"
+				   "8) п÷п╬я│п╪п╬я┌я─п╣я┌я▄ п╡я│п╣я┘ п©п╣я─я│п╬п╫п╟п╤п╣п╧ п╫п╟ п╢п╟п╫п╫п╬п╪ email'e.\r\n"
 				   "\r\n"
-				   "   Чего ваша душа желает? ";
+				   "   п╖п╣пЁп╬ п╡п╟я┬п╟ п╢я┐я┬п╟ п╤п╣п╩п╟п╣я┌? ";
 
 const char *WELC_MESSG =
 	"\r\n"
-	"  Добро пожаловать на землю Киевскую, богатую историей и самыми невероятными\r\n"
-	"приключениями. Возможно, вам они понравятся, и вы станете в один ряд с героями\r\n" "давно минувших дней.\r\n\r\n";
+	"  п■п╬п╠я─п╬ п©п╬п╤п╟п╩п╬п╡п╟я┌я▄ п╫п╟ п╥п╣п╪п╩я▌ п п╦п╣п╡я│п╨я┐я▌, п╠п╬пЁп╟я┌я┐я▌ п╦я│я┌п╬я─п╦п╣п╧ п╦ я│п╟п╪я▀п╪п╦ п╫п╣п╡п╣я─п╬я▐я┌п╫я▀п╪п╦\r\n"
+	"п©я─п╦п╨п╩я▌я┤п╣п╫п╦я▐п╪п╦. п▓п╬п╥п╪п╬п╤п╫п╬, п╡п╟п╪ п╬п╫п╦ п©п╬п╫я─п╟п╡я▐я┌я│я▐, п╦ п╡я▀ я│я┌п╟п╫п╣я┌п╣ п╡ п╬п╢п╦п╫ я─я▐п╢ я│ пЁп╣я─п╬я▐п╪п╦\r\n" "п╢п╟п╡п╫п╬ п╪п╦п╫я┐п╡я┬п╦я┘ п╢п╫п╣п╧.\r\n\r\n";
 
 const char *START_MESSG =
-	" Буде здравы, странник.\r\n"
-	" Вот и ты стал на тропу увлекательных приключений, которые, надеемся, ждут\r\n"
-	"тебя в нашем мире.\r\n"
-	" Твоя задача непроста, но надеемся, что ты сумеешь достойно решить ее.\r\n"
-	" В добрый час, путник, и да будет скатертью тебе дорога...\r\n" "\r\n";
+	" п▒я┐п╢п╣ п╥п╢я─п╟п╡я▀, я│я┌я─п╟п╫п╫п╦п╨.\r\n"
+	" п▓п╬я┌ п╦ я┌я▀ я│я┌п╟п╩ п╫п╟ я┌я─п╬п©я┐ я┐п╡п╩п╣п╨п╟я┌п╣п╩я▄п╫я▀я┘ п©я─п╦п╨п╩я▌я┤п╣п╫п╦п╧, п╨п╬я┌п╬я─я▀п╣, п╫п╟п╢п╣п╣п╪я│я▐, п╤п╢я┐я┌\r\n"
+	"я┌п╣п╠я▐ п╡ п╫п╟я┬п╣п╪ п╪п╦я─п╣.\r\n"
+	" п╒п╡п╬я▐ п╥п╟п╢п╟я┤п╟ п╫п╣п©я─п╬я│я┌п╟, п╫п╬ п╫п╟п╢п╣п╣п╪я│я▐, я┤я┌п╬ я┌я▀ я│я┐п╪п╣п╣я┬я▄ п╢п╬я│я┌п╬п╧п╫п╬ я─п╣я┬п╦я┌я▄ п╣п╣.\r\n"
+	" п▓ п╢п╬п╠я─я▀п╧ я┤п╟я│, п©я┐я┌п╫п╦п╨, п╦ п╢п╟ п╠я┐п╢п╣я┌ я│п╨п╟я┌п╣я─я┌я▄я▌ я┌п╣п╠п╣ п╢п╬я─п╬пЁп╟...\r\n" "\r\n";
 
 int max_exp_gain_pc(CharData *ch) {
 	int result = 1;
 	if (!ch->IsNpc()) {
-		int max_per_lev = GetExpUntilNextLvl(ch, ch->GetLevel() + 1) - GetExpUntilNextLvl(ch, ch->GetLevel() + 0); //тут берем левел без плюсов от стафа
+		int max_per_lev = GetExpUntilNextLvl(ch, ch->GetLevel() + 1) - GetExpUntilNextLvl(ch, ch->GetLevel() + 0); //я┌я┐я┌ п╠п╣я─п╣п╪ п╩п╣п╡п╣п╩ п╠п╣п╥ п©п╩я▌я│п╬п╡ п╬я┌ я│я┌п╟я└п╟
 		result = max_per_lev / (10 + GetRealRemort(ch));
 	}
 	return result;
@@ -566,6 +566,24 @@ void RuntimeConfiguration::load_statistics_configuration(const pugi::xml_node *r
 	m_statistics = StatisticsConfiguration(host, port);
 }
 
+void RuntimeConfiguration::load_perfetto_configuration(const pugi::xml_node *root) {
+	const auto perfetto = root->child("perfetto");
+	if (!perfetto) {
+		return;
+	}
+
+	const auto enabled = perfetto.child("enabled");
+	if (enabled) {
+		const auto enabled_value = enabled.child_value();
+		m_perfetto.set_enabled(enabled_value && 0 == strcmp("true", enabled_value));
+	}
+
+	const auto trace_file = perfetto.child("trace_file");
+	if (trace_file) {
+		m_perfetto.set_trace_file(trace_file.child_value());
+	}
+}
+
 typedef std::map<EOutputStream, std::string> EOutputStream_name_by_value_t;
 typedef std::map<const std::string, EOutputStream> EOutputStream_value_by_name_t;
 EOutputStream_name_by_value_t EOutputStream_name_by_value;
@@ -672,11 +690,11 @@ const std::string &NAME_BY_ITEM<CLogInfo::EMode>(const CLogInfo::EMode item) {
 const char *RuntimeConfiguration::CONFIGURATION_FILE_NAME = "misc/configuration.xml";
 
 const RuntimeConfiguration::logs_t LOGS({
-											CLogInfo("syslog", "СИСТЕМНЫЙ"),
-											CLogInfo("log/errlog.txt", "ОШИБКИ МИРА"),
-											CLogInfo("log/imlog.txt", "ИНГРЕДИЕНТНАЯ МАГИЯ"),
-											CLogInfo("log/msdp.txt", "лог MSDP пакетов"),
-											CLogInfo("log/money.txt", "лог обращения денег")
+											CLogInfo("syslog", "п║п≤п║п╒п∙п°п²п╚п≥"),
+											CLogInfo("log/errlog.txt", "п·п╗п≤п▒п п≤ п°п≤п═п░"),
+											CLogInfo("log/imlog.txt", "п≤п²п⌠п═п∙п■п≤п∙п²п╒п²п░п╞ п°п░п⌠п≤п╞"),
+											CLogInfo("log/msdp.txt", "п╩п╬пЁ MSDP п©п╟п╨п╣я┌п╬п╡"),
+											CLogInfo("log/money.txt", "п╩п╬пЁ п╬п╠я─п╟я┴п╣п╫п╦я▐ п╢п╣п╫п╣пЁ")
 										});
 
 constexpr std::size_t RuntimeConfiguration::OUTPUT_QUEUE_SIZE;
@@ -710,6 +728,7 @@ void RuntimeConfiguration::load_from_file(const char *filename) {
 		load_boards_configuration(&root);
 		load_external_triggers(&root);
 		load_statistics_configuration(&root);
+		load_perfetto_configuration(&root);
 	}
 	catch (const std::exception &e) {
 		std::cerr << "Error when loading configuration file " << filename << ": " << e.what() << "\r\n";
